@@ -13,30 +13,30 @@
 
 var gulp        = require('gulp'),
 
-    // Global tools
-    browserSync = require('browser-sync'),
-    gutil       = require('gulp-util'),
-    plumber     = require('gulp-plumber'),
-    rename      = require('gulp-rename'),
-    clean       = require('gulp-clean'),
-    concat      = require('gulp-concat'),
-    filesize    = require('gulp-filesize'),
-    uglify      = require('gulp-uglify'),
+// Global tools
+browserSync = require('browser-sync'),
+gutil       = require('gulp-util'),
+plumber     = require('gulp-plumber'),
+rename      = require('gulp-rename'),
+clean       = require('gulp-clean'),
+concat      = require('gulp-concat'),
+filesize    = require('gulp-filesize'),
+uglify      = require('gulp-uglify'),
 
 
-    // For less-css files
-    less        = require('gulp-less'),
-    prefixer    = require('gulp-autoprefixer'),
+// For less-css files
+less        = require('gulp-less'),
+prefixer    = require('gulp-autoprefixer'),
 
-    // For jade
-    jade        = require('gulp-jade'),
+// For jade
+jade        = require('gulp-jade'),
 
-    // HTML validation
-    htmlvalidator       = require('gulp-w3cjs'),
+// HTML validation
+htmlvalidator       = require('gulp-w3cjs'),
 
-    // For image files
-    changed = require('gulp-changed'),
-    imagemin = require('gulp-imagemin');
+// For image files
+changed = require('gulp-changed'),
+imagemin = require('gulp-imagemin');
 
 
 
@@ -48,19 +48,31 @@ var paths = {
     css_output          : 'style.css',
     jades               : './src/*.jade',
     js                  : {
-      files             : './src/js/*.js',
-      output            : 'main.min.js',
-      build             : './build/assets/js',
-      vendors           : {
-        files             : './src/js/vendor/*.js',
-        output            : 'vendors.min.js'
-      }
+        files             : './src/js/*.js',
+        output            : 'main.min.js',
+        build             : './build/assets/js',
+        vendors           : {
+            files             : './src/js/vendor/*.js',
+            output            : 'vendors.min.js'
+        }
     },
     images_src          : './src/images/**/*',
     css                 : './build/assets/css',
     images              : './build/assets/images',
     icons               : './src/favicons'
 };
+
+
+var filesToMove = ['./build/assets/*'];
+
+gulp.task('move', function(){
+    gulp.src(paths.js.build + '/*')
+    .pipe(gulp.dest('./js/'));
+
+
+    gulp.src(paths.css + '/*')
+    .pipe(gulp.dest('./css/'));
+});
 
 
 
@@ -73,9 +85,9 @@ var paths = {
 // Static server
 gulp.task('server', function() {
     browserSync.init(null, {
-      server: {
-        baseDir: paths.build
-      }
+        server: {
+            baseDir: paths.build
+        }
     });
 });
 
@@ -90,24 +102,25 @@ gulp.task('server', function() {
 // 6. Reload Browser sync
 
 gulp.task('clean', function () {
-  return gulp.src(paths.build + '/*', {read: false})
-    .pipe(clean());
+return gulp.src(paths.build + '/*', {read: false})
+.pipe(clean());
 });
 
 gulp.task('less', function () {
     return gulp.src(paths.less)
-        .pipe(plumber())
-        .pipe(less())
-        .pipe(prefixer('last 5 versions', 'ie 8'))
-        .pipe(gulp.dest(paths.css))
-        .pipe(rename('style.css'))
-        .pipe(less({
-            compress: true
+    .pipe(plumber())
+    .pipe(less())
+    .pipe(prefixer('last 5 versions', 'ie 8'))
+    .pipe(gulp.dest(paths.css))
+    .pipe(rename('style.css'))
+    .pipe(less({
+        compress: true
         }))
         .pipe(rename('style.min.css'))
         .pipe(gulp.dest(paths.css))
         .pipe(browserSync.reload({stream:true}));
-});
+    }
+);
 
 gulp.task('js', function() {
     return gulp.src(paths.js.files)
@@ -137,19 +150,17 @@ gulp.task('js_vendor', function() {
 
 gulp.task('templates', function() {
     return gulp.src(paths.jades)
-        .pipe(plumber())
-        .pipe(jade({
-            pretty : true
-        }))
-        .pipe(gulp.dest(paths.build))
-        .pipe(browserSync.reload({stream:true}));
+    .pipe(plumber())
+    .pipe(jade({pretty : true}))
+    .pipe(gulp.dest(paths.build))
+    .pipe(browserSync.reload({stream:true}));
 });
 
 
 // HTML validation
 gulp.task('htmlvalidator', function () {
     return gulp.src(paths.html + '/*.html')
-        .pipe(htmlvalidator());
+    .pipe(htmlvalidator());
 });
 
 
@@ -159,11 +170,9 @@ gulp.task('htmlvalidator', function () {
 
 gulp.task('images', function () {
     return gulp.src(paths.images_src)
-        .pipe(changed(paths.images))
-        .pipe(imagemin({
-            optimizationLevel: 5
-        }))
-        .pipe(gulp.dest(paths.images));
+    .pipe(changed(paths.images))
+    .pipe(imagemin({optimizationLevel: 5}))
+    .pipe(gulp.dest(paths.images));
 });
 
 
@@ -171,15 +180,13 @@ gulp.task('images', function () {
 // Favicons and touch icons
 gulp.task('icons', function () {
     return gulp.src(paths.icons + 'favicon.png')
-        .pipe(rename('favicon.ico'))
-        .pipe(gulp.dest(paths.build));
+    .pipe(rename('favicon.ico'))
+    .pipe(gulp.dest(paths.build));
 });
 gulp.task('touchicons', function() {
     return gulp.src(paths.icons + '/apple-touch*.png')
-        .pipe(imagemin({
-            optimizationLevel: 5
-        }))
-        .pipe(gulp.dest(paths.build));
+    .pipe(imagemin({optimizationLevel: 5}))
+    .pipe(gulp.dest(paths.build));
 });
 
 
@@ -191,5 +198,5 @@ gulp.task( 'watch', function () {
     gulp.watch( paths.html, ['htmlvalidator'] );
 });
 
-gulp.task('default', ['clean', 'server', 'images', 'templates', 'less', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator', 'watch']);
+gulp.task('default', ['clean', 'images', 'templates', 'less', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator']);
 
