@@ -198,5 +198,5 @@ gulp.task( 'watch', function () {
     gulp.watch( paths.html, ['htmlvalidator'] );
 });
 
-gulp.task('default', ['clean', 'images', 'templates', 'less', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator']);
+gulp.task('default', ['clean', 'images', 'templates', 'less', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator', 'move']);
 
