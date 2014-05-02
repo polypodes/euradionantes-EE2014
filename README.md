@@ -2,6 +2,6 @@
 
 An EuradioNantes website for 2014 european elections.
 
-## WIP
+This is a Github Pages based website: http://polypodes.github.io/euradionantes-EE2014o
 
-It’s a work in progress, more infos to come.
+Plase consider & work in the *gh-pages branch as the main branch*
