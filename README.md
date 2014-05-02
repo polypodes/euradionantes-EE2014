@@ -10,8 +10,15 @@ This is a Github "Project Pages" based website available at
 
 Contributions must be pushed into the __[gh-pages branch](https://github.com/polypodes/euradionantes-EE2014/tree/gh-pages) as the main branch__
 
+## Pages build: 1/2 Gulp
 
-## Pages build
+```bash
+npm install -g gulp
+npm install
+gulp
+```
+
+## Pages build: 2/2 Jekyll
 
 Every GitHub Page is run through Jekyll when you push content. To run this locally, check this [Jelp article from Github](https://help.github.com/articles/using-jekyll-with-pages).
 
@@ -22,7 +29,7 @@ If asked, install [nogogiri](http://nokogiri.org/tutorials/installing_nokogiri.h
 Then install Jekyll:
 
 ```bash
-sudo gem install bundler jekyll
+sudo gem install bundler jekyll github-pages
 ```
 
 Then build your pages locally:

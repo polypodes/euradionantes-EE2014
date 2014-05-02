@@ -72,6 +72,9 @@ gulp.task('move', function(){
 
     gulp.src(paths.css + '/*')
     .pipe(gulp.dest('./css/'));
+
+    gulp.src(paths.build + '/index.html')
+    .pipe(gulp.dest('./'));
 });
 
 
