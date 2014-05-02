@@ -11,6 +11,39 @@ This is a Github "Project Pages" based website available at
 Contributions must be pushed into the __[gh-pages branch](https://github.com/polypodes/euradionantes-EE2014/tree/gh-pages) as the main branch__
 
 
+## Pages build
+
+Every GitHub Page is run through Jekyll when you push content. To run this locally, check this [Jelp article from Github](https://help.github.com/articles/using-jekyll-with-pages).
+
+Assuming that `ruby --version` returns `1.9.3`or `2.0.0`, first install `Bundler`
+
+If asked, install [nogogiri](http://nokogiri.org/tutorials/installing_nokogiri.html) (targetting homebrew 0.9)
+
+Then install Jekyll:
+
+```bash
+sudo gem install bundler jekyll
+```
+
+Then build your pages locally:
+
+```bash
+bundle install
+```
+
+To run Jekyll in a way that matches the GitHub Pages build server, run Jekyll with Bundler:
+
+```bash
+bundle exec jekyll serve
+```
+
+in the root of your repository (after switching to the gh-pages branch for project repositories), and your site should be available at [http://localhost:4000].
+
+Check the [Jekyll basic commands here](http://jekyllrb.com/docs/usage/)
+
+Working [solution for the nokogiri, libxml, libxslt errors while installing Jekyll](http://iamjosh.wordpress.com/2014/03/14/installing-nokogiri-via-bundler-on-mac-or-why-did-this-take-two-hours/)
+
+
 ## Deployement
 
 ```bash
