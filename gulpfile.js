@@ -11,68 +11,65 @@
 
 
 
-var gulp        = require('gulp'),
+var gulp = require('gulp'),
 
-// Global tools
-browserSync = require('browser-sync'),
-gutil       = require('gulp-util'),
-plumber     = require('gulp-plumber'),
-rename      = require('gulp-rename'),
-clean       = require('gulp-clean'),
-concat      = require('gulp-concat'),
-filesize    = require('gulp-filesize'),
-uglify      = require('gulp-uglify'),
+    // Global tools
+    browserSync = require('browser-sync'),
+    gutil       = require('gulp-util'),
+    plumber     = require('gulp-plumber'),
+    rename      = require('gulp-rename'),
+    clean       = require('gulp-clean'),
+    concat      = require('gulp-concat'),
+    filesize    = require('gulp-filesize'),
+    uglify      = require('gulp-uglify'),
 
+    // For less-css files
+    less        = require('gulp-less'),
+    prefixer    = require('gulp-autoprefixer'),
 
-// For less-css files
-less        = require('gulp-less'),
-prefixer    = require('gulp-autoprefixer'),
+    // For jade
+    jade        = require('gulp-jade'),
 
-// For jade
-jade        = require('gulp-jade'),
+    // HTML validation
+    htmlvalidator       = require('gulp-w3cjs'),
 
-// HTML validation
-htmlvalidator       = require('gulp-w3cjs'),
-
-// For image files
-changed = require('gulp-changed'),
-imagemin = require('gulp-imagemin');
+    // For image files
+    changed = require('gulp-changed'),
+    imagemin = require('gulp-imagemin');
 
 
 
 // Paths
 var paths = {
+    base               : './',
     build               : './assets',
     src                 : './src',
-    less                : './src/less/*.less',
-    css_output          : 'style.css',
-    jades               : './src/*.jade',
-    images_src          : './src/images/**/*',
-    css                 : './assets/css',
-    images              : './assets/images',
-    icons               : './src/favicons',
     js                  : {
         files               : './src/js/*.js',
-        output              : 'main.min.js',
-        build               : './assets/js',
+        output              : 'main.js',
+        output_min          : 'main.min.js',
+        dest                : './assets/js',
         vendors             : {
             files               : './src/js/vendor/*.js',
-            output              : 'vendors.min.js'
+            output              : 'vendors.js',
+            output_min          : 'vendors.min.js'
         }
     },
     style               : {
         files               : './src/less/*.less',
         output              : 'style.css',
-        build               : './assets/css',
+        output_min          : 'style.min.css',
+        dest                : './assets/css'
     },
     html                : {
         files               : './src/*.jade',
-        output:             : 'index.html',
-        build:              : './'
+        output              : 'index.html',
+        dest                : './'
     },
     images              : {
         files               : './src/images/**/*',
-        build               : './assets/images',
+        icons               : './src/favicons',
+        dest                : './assets/images'
     },
 
 };
@@ -91,6 +88,7 @@ gulp.task('server', function() {
 });
 
 
+
 // Tasks specs
 // 0. Cleaning before building
 // 1. Less processed
@@ -105,40 +103,41 @@ gulp.task('clean', function () {
     .pipe(clean());
 });
 
-gulp.task('less', function () {
-    return gulp.src(paths.less)
+gulp.task('style', function () {
+    return gulp.src(paths.style.files)
     .pipe(plumber())
     .pipe(less())
     .pipe(prefixer('last 5 versions', 'ie 8'))
-    .pipe(gulp.dest(paths.css))
-    .pipe(rename('style.css'))
+    .pipe(gulp.dest(paths.style.dest))
+    .pipe(rename(paths.style.output))
     .pipe(less({
         compress: true
         }))
-        .pipe(rename('style.min.css'))
-        .pipe(gulp.dest(paths.css))
+        .pipe(rename(paths.style.output_min))
+        .pipe(gulp.dest(paths.style.dest))
         .pipe(browserSync.reload({stream:true}));
     }
 );
 
 gulp.task('js', function() {
     return gulp.src(paths.js.files)
+    .pipe(filesize())
     .pipe(uglify()) // = concat+ugly
     .pipe(rename(paths.js.output))
-    .pipe(gulp.dest(paths.js.build))
+    .pipe(gulp.dest(paths.js.dest))
     .pipe(filesize())
     .on('error', gutil.log)
 });
 
 gulp.task('js_vendor', function() {
     return gulp.src(paths.js.vendors.files)
+    .pipe(filesize())
     .pipe(uglify()) // = concat+ugly
     .pipe(rename(paths.js.vendors.output))
-    .pipe(gulp.dest(paths.js.build))
+    .pipe(gulp.dest(paths.js.dest))
     .pipe(filesize())
     .on('error', gutil.log)
 });
-
 
 
 
@@ -148,19 +147,21 @@ gulp.task('js_vendor', function() {
 // 3. Reload BS
 
 gulp.task('templates', function() {
-    return gulp.src(paths.jades)
+    return gulp.src(paths.html.files)
     .pipe(plumber())
     .pipe(jade({pretty : true}))
-    .pipe(gulp.dest(paths.build))
+    .pipe(gulp.dest(paths.base))
     .pipe(browserSync.reload({stream:true}));
 });
 
 
+
 // HTML validation
 gulp.task('htmlvalidator', function () {
-    return gulp.src(paths.html + '/*.html')
+    return gulp.src(paths.base + '/*.html')
     .pipe(htmlvalidator());
 });
+
 
 
 // Image files compression
@@ -168,34 +169,36 @@ gulp.task('htmlvalidator', function () {
 // 2. Compressed images to destination
 
 gulp.task('images', function () {
-    return gulp.src(paths.images_src)
-    .pipe(changed(paths.images))
+    return gulp.src(paths.images.files)
+    .pipe(changed(paths.images.dest))
     .pipe(imagemin({optimizationLevel: 5}))
-    .pipe(gulp.dest(paths.images));
+    .pipe(gulp.dest(paths.images.dest));
 });
 
 
 
 // Favicons and touch icons
 gulp.task('icons', function () {
-    return gulp.src(paths.icons + 'favicon.png')
+    return gulp.src(paths.images.icons + 'favicon.png')
     .pipe(rename('favicon.ico'))
     .pipe(gulp.dest(paths.build));
 });
 gulp.task('touchicons', function() {
-    return gulp.src(paths.icons + '/apple-touch*.png')
+    return gulp.src(paths.images.icons + '/apple-touch*.png')
     .pipe(imagemin({optimizationLevel: 5}))
     .pipe(gulp.dest(paths.build));
 });
 
 
+
 // Watch modifications
 gulp.task( 'watch', function () {
-    gulp.watch( paths.less, ['less'] );
-    gulp.watch( paths.images_src, ['images'] );
-    gulp.watch( paths.jades, ['templates'] );
-    gulp.watch( paths.html, ['htmlvalidator'] );
+    gulp.watch( paths.style.files, ['style'] );
+    gulp.watch( paths.images.files, ['images'] );
+    gulp.watch( paths.html.files, ['templates'] );
+    gulp.watch( paths.html.output, ['htmlvalidator'] );
 });
 
-gulp.task('default', ['clean', 'images', 'templates', 'less', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator', 'move']);
+gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator', 'server']);
+gulp.task('work', ['clean', 'images', 'templates', 'style', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator']);
 
