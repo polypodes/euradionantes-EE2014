@@ -63,6 +63,7 @@ var paths = {
     },
     html                : {
         files               : './src/*.jade',
+        layouts             : './src/layouts/**/*.jade',
         output              : 'index.html',
         dest                : './'
     },
@@ -196,9 +197,10 @@ gulp.task( 'watch', function () {
     gulp.watch( paths.style.files, ['style'] );
     gulp.watch( paths.images.files, ['images'] );
     gulp.watch( paths.html.files, ['templates'] );
+    gulp.watch( paths.html.layouts, ['templates'] );
     gulp.watch( paths.html.output, ['htmlvalidator'] );
 });
 
-gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator', 'server']);
+gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator', 'server', 'watch']);
 gulp.task('work', ['clean', 'images', 'templates', 'style', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator']);
 
