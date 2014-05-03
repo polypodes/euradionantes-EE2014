@@ -1,0 +1,1 @@
+"use strict";jQuery(document).ready(function(){var e=new GoogleAnalyzer;e.init()});
