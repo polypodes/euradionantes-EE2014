@@ -42,44 +42,40 @@ imagemin = require('gulp-imagemin');
 
 // Paths
 var paths = {
-    build               : './build',
+    build               : './assets',
     src                 : './src',
     less                : './src/less/*.less',
     css_output          : 'style.css',
     jades               : './src/*.jade',
+    images_src          : './src/images/**/*',
+    css                 : './assets/css',
+    images              : './assets/images',
+    icons               : './src/favicons',
     js                  : {
-        files             : './src/js/*.js',
-        output            : 'main.min.js',
-        build             : './build/assets/js',
-        vendors           : {
-            files             : './src/js/vendor/*.js',
-            output            : 'vendors.min.js'
+        files               : './src/js/*.js',
+        output              : 'main.min.js',
+        build               : './assets/js',
+        vendors             : {
+            files               : './src/js/vendor/*.js',
+            output              : 'vendors.min.js'
         }
     },
-    images_src          : './src/images/**/*',
-    css                 : './build/assets/css',
-    images              : './build/assets/images',
-    icons               : './src/favicons'
+    style               : {
+        files               : './src/less/*.less',
+        output              : 'style.css',
+        build               : './assets/css',
+    },
+    html                : {
+        files               : './src/*.jade',
+        output:             : 'index.html',
+        build:              : './'
+    },
+    images              : {
+        files               : './src/images/**/*',
+        build               : './assets/images',
+    },
+
 };
-
-
-var filesToMove = ['./build/assets/*'];
-
-gulp.task('move', function(){
-    gulp.src(paths.js.build + '/*')
-    .pipe(gulp.dest('./js/'));
-
-
-    gulp.src(paths.css + '/*')
-    .pipe(gulp.dest('./css/'));
-
-    gulp.src(paths.build + '/index.html')
-    .pipe(gulp.dest('./'));
-});
-
-
-
-
 
 // The tasks
 // ------------------------------
@@ -89,7 +85,7 @@ gulp.task('move', function(){
 gulp.task('server', function() {
     browserSync.init(null, {
         server: {
-            baseDir: paths.build
+            baseDir: './'
         }
     });
 });
@@ -99,14 +95,14 @@ gulp.task('server', function() {
 // 0. Cleaning before building
 // 1. Less processed
 // 2. Prefixed
-// 3. Copied as style.css in ./build/assets/css
+// 3. Copied as style.css in ./assets/css
 // 4. Minified
-// 5. Copied as style.min.css in ./build/assets/css
+// 5. Copied as style.min.css in ./assets/css
 // 6. Reload Browser sync
 
 gulp.task('clean', function () {
-return gulp.src(paths.build + '/*', {read: false})
-.pipe(clean());
+    return gulp.src(paths.js.build + '/*', {read: false})
+    .pipe(clean());
 });
 
 gulp.task('less', function () {
