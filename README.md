@@ -10,7 +10,7 @@ This is a Github "Project Pages" based website available at
 
 Contributions must be pushed into the __[gh-pages branch](https://github.com/polypodes/euradionantes-EE2014/tree/gh-pages) as the main branch__
 
-## Pages build: 1/2 Gulp
+## Pages build: Gulp
 
 ```bash
 npm install -g gulp

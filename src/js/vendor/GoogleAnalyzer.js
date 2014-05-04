@@ -1,5 +1,5 @@
 /**
- * Google Analytics reltaed helper
+ * Google Analytics related helper
  * Author : LesPolypodes.com
  * License : MIT
  * Disclaimer: This depends on jQuery

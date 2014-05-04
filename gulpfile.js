@@ -46,13 +46,10 @@ var paths = {
     src                 : './src',
     js                  : {
         files               : './src/js/*.js',
-        output              : 'main.js',
         output_min          : 'main.min.js',
         dest                : './assets/js',
         vendors             : {
             files               : './src/js/vendor/*.js',
-            output              : 'vendors.js',
-            output_min          : 'vendors.min.js'
         }
     },
     style               : {
@@ -121,26 +118,13 @@ gulp.task('style', function () {
 );
 
 gulp.task('js', function() {
-    return gulp.src(paths.js.files)
-    .pipe(filesize())
-    .pipe(uglify()) // = concat+ugly
-    .pipe(rename(paths.js.output))
+    return gulp.src([paths.js.files, paths.js.vendors.files])
+    .pipe(concat(paths.js.output_min))
+   // .pipe(uglify()) // = concat+ugly
     .pipe(gulp.dest(paths.js.dest))
-    .pipe(filesize())
-    .on('error', gutil.log)
+    //.pipe(filesize())
+    //.on('error', gutil.log)
 });
-
-gulp.task('js_vendor', function() {
-    return gulp.src(paths.js.vendors.files)
-    .pipe(filesize())
-    .pipe(uglify()) // = concat+ugly
-    .pipe(rename(paths.js.vendors.output))
-    .pipe(gulp.dest(paths.js.dest))
-    .pipe(filesize())
-    .on('error', gutil.log)
-});
-
-
 
 // Jade templates
 // 1. Jade processed with pretty outpu
@@ -194,13 +178,15 @@ gulp.task('touchicons', function() {
 
 // Watch modifications
 gulp.task( 'watch', function () {
-    gulp.watch( paths.style.files, ['style'] );
-    gulp.watch( paths.images.files, ['images'] );
-    gulp.watch( paths.html.files, ['templates'] );
-    gulp.watch( paths.html.layouts, ['templates'] );
-    gulp.watch( paths.html.output, ['htmlvalidator'] );
+    gulp.watch( paths.style.files,      ['style'] );
+    gulp.watch( paths.images.files,     ['images'] );
+    gulp.watch( paths.html.files,       ['templates'] );
+    gulp.watch( paths.html.layouts,     ['templates'] );
+    gulp.watch( paths.html.output,      ['htmlvalidator'] );
+    gulp.watch( paths.js.files,         ['js'] );
+    gulp.watch( paths.js.vendors.files, ['js'] );
 });
 
-gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator', 'server', 'watch']);
-gulp.task('work', ['clean', 'images', 'templates', 'style', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator']);
+gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator', 'server', 'watch']);
+gulp.task('work', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator']);
 
