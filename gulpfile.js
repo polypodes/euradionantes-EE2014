@@ -53,7 +53,8 @@ var paths = {
         }
     },
     style               : {
-        files               : './src/less/*.less',
+        files               : ['./src/less/*.less', '!./src/less/_*.less'],
+        watch               : './src/less/*.less',
         output              : 'style.css',
         output_min          : 'style.min.css',
         dest                : './assets/css'
@@ -180,7 +181,7 @@ gulp.task('touchicons', function() {
 
 // Watch modifications
 gulp.task( 'watch', function () {
-    gulp.watch( paths.style.files,      ['style'] );
+    gulp.watch( paths.style.watch,      ['style'] );
     gulp.watch( paths.images.files,     ['images'] );
     gulp.watch( paths.layout.watch,     ['templates'] );
     gulp.watch( paths.layout.output,      ['htmlvalidator'] );
