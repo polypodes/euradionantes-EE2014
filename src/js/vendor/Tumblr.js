@@ -1,0 +1,47 @@
+/**
+ * Tumblr API Consumer
+ * Author : LesPolypodes.com
+ * License : MIT
+ * Disclaimer: This depends on jQuery (for $.extends(), mainly)
+ */
+var Tumblr = function(){
+
+    var params = {
+            key:    'JF1gaswtw9E1npDP7mtDhBfhgsdxRrhovUBIF52VPJj13hnzFZ',
+            base_url:  'http://api.tumblr.com/v2/blog/euradionantes-ee2014.tumblr.com/',
+            default_type: 'posts/text',
+        };
+    var jQuery;
+
+    /**
+     * Init function
+     * @public
+     */
+    var init = function($) {
+        jQuery = $;
+    }
+
+    var getUrl = function () {
+        return params.base_url + params.default_type + '?api_key=' + params.key;
+    }
+
+    var getData = function(callBack) {
+        jQuery.ajax({
+            url: getUrl(),
+            dataType: 'jsonp',
+            success: function(data){
+                return callBack(data);
+            }
+        });
+    }
+
+    /**
+     * Exposes public methods only
+     */
+    return {
+        init:init,
+        getUrl: getUrl,
+        getData: getData
+    }
+
+}
