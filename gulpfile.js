@@ -58,11 +58,13 @@ var paths = {
         output_min          : 'style.min.css',
         dest                : './assets/css'
     },
-    html                : {
+    layout                : {
         files               : './src/*.jade',
-        layouts             : './src/layouts/**/*.jade',
-        output              : 'index.html',
+        watch               : './src/**/*.jade',
         dest                : './'
+    },
+    validator           : {
+        watchables:         './*.html',
     },
     images              : {
         files               : './src/images/**/*',
@@ -120,10 +122,10 @@ gulp.task('style', function () {
 gulp.task('js', function() {
     return gulp.src([paths.js.files, paths.js.vendors.files])
     .pipe(concat(paths.js.output_min))
-   // .pipe(uglify()) // = concat+ugly
+    .pipe(uglify()) // = concat+ugly
     .pipe(gulp.dest(paths.js.dest))
-    //.pipe(filesize())
-    //.on('error', gutil.log)
+    .pipe(filesize())
+    .on('error', gutil.log)
 });
 
 // Jade templates
@@ -132,7 +134,7 @@ gulp.task('js', function() {
 // 3. Reload BS
 
 gulp.task('templates', function() {
-    return gulp.src(paths.html.files)
+    return gulp.src(paths.layout.files)
     .pipe(plumber())
     .pipe(jade({pretty : true}))
     .pipe(gulp.dest(paths.base))
@@ -143,7 +145,7 @@ gulp.task('templates', function() {
 
 // HTML validation
 gulp.task('htmlvalidator', function () {
-    return gulp.src(paths.base + '/*.html')
+    return gulp.src(paths.validator.watchables)
     .pipe(htmlvalidator());
 });
 
@@ -180,13 +182,12 @@ gulp.task('touchicons', function() {
 gulp.task( 'watch', function () {
     gulp.watch( paths.style.files,      ['style'] );
     gulp.watch( paths.images.files,     ['images'] );
-    gulp.watch( paths.html.files,       ['templates'] );
-    gulp.watch( paths.html.layouts,     ['templates'] );
-    gulp.watch( paths.html.output,      ['htmlvalidator'] );
+    gulp.watch( paths.layout.watch,     ['templates'] );
+    gulp.watch( paths.layout.output,      ['htmlvalidator'] );
     gulp.watch( paths.js.files,         ['js'] );
     gulp.watch( paths.js.vendors.files, ['js'] );
 });
 
 gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator', 'server', 'watch']);
-gulp.task('work', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator']);
+gulp.task('build', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator']);
 
