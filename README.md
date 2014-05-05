@@ -2,9 +2,7 @@
 
 An EuradioNantes website for 2014 european elections.
 
-This is a Github "Project Pages" based website available at
-- (primary) http://euradionantes.lespolypodes.com
-- (secondary) http://polypodes.github.io/euradionantes-EE20144
+A Github "Project Pages" based website available at http://euradionantes.lespolypodes.com
 
 ## Contributions
 
