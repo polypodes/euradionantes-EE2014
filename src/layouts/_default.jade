@@ -6,7 +6,8 @@ html(lang="fr", class="nojs")
   // <![endif]
   include ./default-partials/_html-header
 
-  body
-    include default-partials/_header
-    block content
-    include default-partials/_footer
+  body.debug
+    #page.container
+        include default-partials/_header
+        block content
+        include default-partials/_footer
