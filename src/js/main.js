@@ -26,8 +26,6 @@ jQuery('document').ready(function() {
             if(0 < data.response.posts.length) {
                 $('#live-media-video .video-container').empty().append($('<iframe>', {
                     src: "".concat(data.response.posts[0].youtube.embed, "?autoplay=1"),
-                    //width: '100%',
-                    height: '320',
                 }));
             }
         }
