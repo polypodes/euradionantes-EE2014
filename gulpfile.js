@@ -45,12 +45,9 @@ var paths = {
     build               : './assets',
     src                 : './src',
     js                  : {
-        files               : './src/js/*.js',
+        files               : ['./src/js/*.js', './src/js/vendor/*.js', './src/vendors/soundcloud.custom.player/**/*.js'],
         output_min          : 'main.min.js',
         dest                : './assets/js',
-        vendors             : {
-            files               : './src/js/vendor/*.js',
-        }
     },
     style               : {
         files               : ['./src/less/*.less', '!./src/less/_*.less'],
@@ -121,7 +118,7 @@ gulp.task('style', function () {
 );
 
 gulp.task('js', function() {
-    return gulp.src([paths.js.files, paths.js.vendors.files])
+    return gulp.src(paths.js.files)
     .pipe(concat(paths.js.output_min))
     .pipe(uglify()) // = concat+ugly
     .pipe(gulp.dest(paths.js.dest))
