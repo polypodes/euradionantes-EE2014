@@ -182,7 +182,7 @@ gulp.task( 'watch', function () {
     gulp.watch( paths.style.watch,      ['style'] );
     gulp.watch( paths.images.files,     ['images'] );
     gulp.watch( paths.layout.watch,     ['templates'] );
-    gulp.watch( paths.layout.output,      ['htmlvalidator'] );
+    gulp.watch( paths.layout.output,    ['htmlvalidator'] );
     gulp.watch( paths.js.files,         ['js'] );
     gulp.watch( paths.js.vendors.files, ['js'] );
 });
