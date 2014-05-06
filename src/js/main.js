@@ -6,16 +6,18 @@ jQuery(document).ready(function ($) {
     var analyzer = new GoogleAnalyzer();
     analyzer.init();
 
-    var tumblr = new Tumblr();
+    var tumblr = new Tumblr(),
+        $poster = $('section.posts');
+
     tumblr.init($);
-    tumblr.getData(function(data) {
+
+    tumblr.getData('text',function(data) {
         if('OK' == data.meta.msg) {
-            $('section.posts').append($('<h2>').text("Tumblr :"));
+            $poster.append($('<h2>').text("Tumblr :"));
             for(var i in data.response.posts) {
-                $('section.posts').append($('<article>').html(data.response.posts[i].body));
+                $poster.append($('<article>').html(data.response.posts[i].body));
             }
         }
     });
-
 
 });
