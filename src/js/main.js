@@ -1,13 +1,11 @@
 "use strict"
-
-jQuery(document).ready(function ($) {
-
+jQuery('document').ready(function() {
     // Google Analytics helper: auto-bounding output links, etc.
     var analyzer = new GoogleAnalyzer();
     analyzer.init();
 
     var tumblr = new Tumblr(),
-        $poster = $('#cold-tmblr');
+    $poster = $('#cold-tmblr');
 
     tumblr.init($);
 
@@ -17,9 +15,10 @@ jQuery(document).ready(function ($) {
                 $poster.append($('<article>').html(
                     '<h1>' + data.response.posts[i].title + '</h1>' +
                     data.response.posts[i].summary
-                ));
+                    )
+                );
             }
         }
     });
-
 });
+
