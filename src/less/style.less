@@ -60,10 +60,15 @@
 //
 // Here is Soundcloud player
 // ==========================================================================
-@import "../vendors/soundcloud.custom.player/sc-player-standard.css";
-@import "../vendors/soundcloud.custom.player/sc-player.css";
 
+//  Here is the imports found in :
+//  ../vendors/soundcloud.custom.player/css/sc-player-standard.css;
+// More docs : https://github.com/soundcloud/soundcloud-custom-player
+// @import (inline) "../vendors/soundcloud.custom.player/css/sc-player-standard/standards.css";
+// @import (inline) "../vendors/soundcloud.custom.player/css/sc-player-standard/structure-horizontal.css";
+// @import (inline) "../vendors/soundcloud.custom.player/css/sc-player-standard/colors-green.css";
 
+// @import (inline) "../vendors/soundcloud.custom.player/css/sc-player.css";
 
 
 
@@ -85,8 +90,6 @@
 // ==========================================================================
 
 @import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,700,900,400italic,700italic);
-
-
 
 
 
@@ -137,7 +140,8 @@ img {
 }
 
 iframe {
-    border: 0
+    border: 0;
+    width: 100%;
 }
 
 
