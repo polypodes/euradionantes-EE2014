@@ -45,7 +45,7 @@ var paths = {
     build               : './assets',
     src                 : './src',
     js                  : {
-        files               : ['./src/js/*.js', './src/js/vendor/*.js', './src/vendors/soundcloud.custom.player/**/*.js'],
+        files               : ['./src/js/vendor/*.js', './src/vendors/soundcloud.custom.player/**/*.js','./src/js/*.js'],
         output_min          : 'main.min.js',
         dest                : './assets/js',
     },
@@ -119,11 +119,12 @@ gulp.task('style', function () {
 
 gulp.task('js', function() {
     return gulp.src(paths.js.files)
+    .pipe(plumber())
     .pipe(concat(paths.js.output_min))
     .pipe(uglify()) // = concat+ugly
     .pipe(gulp.dest(paths.js.dest))
     .pipe(filesize())
-    .on('error', gutil.log)
+    .pipe(browserSync.reload({stream:true}));
 });
 
 // Jade templates

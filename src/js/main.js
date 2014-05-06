@@ -14,7 +14,10 @@ jQuery(document).ready(function ($) {
     tumblr.getData('text',function(data) {
         if('OK' == data.meta.msg) {
             for(var i in data.response.posts) {
-                $poster.append($('<article>').html(data.response.posts[i].body));
+                $poster.append($('<article>').html(
+                    '<h1>' + data.response.posts[i].title + '</h1>' +
+                    data.response.posts[i].summary
+                ));
             }
         }
     });
