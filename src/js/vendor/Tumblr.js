@@ -25,6 +25,14 @@ var Tumblr = function(){
         return params.base_url + 'posts/' + type + '?api_key=' + params.key;
     }
 
+    var getVideos = function(callBack) {
+        return getData('video', callBack);
+    }
+
+    var getPosts = function(callBack) {
+        return getData('text', callBack);
+    }
+
     var getData = function(type, callBack) {
         jQuery.ajax({
             url: getUrl(type),
@@ -45,8 +53,20 @@ var Tumblr = function(){
      var decorate = function(data) {
         if(0 < data.response.posts.length) {
             for(var i in data.response.posts) {
-                var html = data.response.posts[i].body;
-                data.response.posts[i].summary = getSummary(html, params.summary_length);
+                if(data.response.posts[i].body) {
+                    var html = data.response.posts[i].body;
+                    data.response.posts[i].summary = getSummary(html, params.summary_length);
+                }
+                if(data.response.posts[i].permalink_url) {
+                    // we allow http/https/www/no www URLs:
+                    var watch = "youtube.com/watch?v=";
+                    if(data.response.posts[i].permalink_url.indexOf(watch) > -1) {
+                        var url = data.response.posts[i].permalink_url;
+                        data.response.posts[i].youtube = {
+                            embed: url.replace(watch,'youtube.com/embed/'),
+                        }
+                    }
+                }
             }
             return data;
         }
@@ -74,6 +94,8 @@ var Tumblr = function(){
         init:init,
         getUrl: getUrl,
         getData: getData,
+        getPosts: getPosts,
+        getVideos: getVideos,
         getSummary: getSummary
     }
 

@@ -2228,6 +2228,7 @@ img {
 }
 iframe {
   border: 0;
+  width: 100%;
 }
 .video-container {
   position: relative;
@@ -2259,8 +2260,8 @@ iframe {
 .live-tweets iframe {
   width: 100%;
 }
-#live-media-audio iframe {
-  background-color: transparent;
+.sc-player {
+  outline: 1px blue solid;
 }
 #main-header,
 #main-content,

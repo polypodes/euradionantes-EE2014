@@ -45,12 +45,9 @@ var paths = {
     build               : './assets',
     src                 : './src',
     js                  : {
-        files               : './src/js/*.js',
+        files               : ['./src/js/vendor/*.js', './src/vendors/soundcloud.custom.player/js/*.js','./src/js/*.js'],
         output_min          : 'main.min.js',
         dest                : './assets/js',
-        vendors             : {
-            files               : './src/js/vendor/*.js',
-        }
     },
     style               : {
         files               : ['./src/less/*.less', '!./src/less/_*.less'],
@@ -121,7 +118,7 @@ gulp.task('style', function () {
 );
 
 gulp.task('js', function() {
-    return gulp.src([paths.js.files, paths.js.vendors.files])
+    return gulp.src(paths.js.files)
     .pipe(plumber())
     .pipe(concat(paths.js.output_min))
     .pipe(uglify()) // = concat+ugly
@@ -185,9 +182,8 @@ gulp.task( 'watch', function () {
     gulp.watch( paths.style.watch,      ['style'] );
     gulp.watch( paths.images.files,     ['images'] );
     gulp.watch( paths.layout.watch,     ['templates'] );
-    gulp.watch( paths.layout.output,      ['htmlvalidator'] );
+    gulp.watch( paths.layout.output,    ['htmlvalidator'] );
     gulp.watch( paths.js.files,         ['js'] );
-    gulp.watch( paths.js.vendors.files, ['js'] );
 });
 
 gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator', 'server', 'watch']);
