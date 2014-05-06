@@ -7,13 +7,12 @@ jQuery(document).ready(function ($) {
     analyzer.init();
 
     var tumblr = new Tumblr(),
-        $poster = $('section.posts');
+        $poster = $('#cold-tmblr');
 
     tumblr.init($);
 
     tumblr.getData('text',function(data) {
         if('OK' == data.meta.msg) {
-            $poster.append($('<h2>').text("Tumblr :"));
             for(var i in data.response.posts) {
                 $poster.append($('<article>').html(data.response.posts[i].body));
             }
