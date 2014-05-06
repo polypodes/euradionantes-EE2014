@@ -1,5 +1,3 @@
-@import "../vendors/soundcloud.custom.player/sc-player-standard.css";
-@import "../vendors/soundcloud.custom.player/sc-player.css";
 @import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,700,900,400italic,700italic);
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
@@ -2230,6 +2228,7 @@ img {
 }
 iframe {
   border: 0;
+  width: 100%;
 }
 .video-container {
   position: relative;
@@ -2261,8 +2260,8 @@ iframe {
 .live-tweets iframe {
   width: 100%;
 }
-#live-media-audio iframe {
-  background-color: transparent;
+.sc-player {
+  outline: 1px blue solid;
 }
 #main-header,
 #main-content,
