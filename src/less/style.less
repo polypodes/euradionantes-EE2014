@@ -83,6 +83,7 @@
 @import "_variables.less";
 
 @transluscent: rgba(0, 40, 80, 0.8);
+@lines: darken(@brand-primary, 40%);
 
 
 //
@@ -190,9 +191,98 @@ iframe {
 // =====================================
 // https://soundcloud.com/euradionantes/sets/ep2014
 
-.sc-player {
-    outline: 1px blue solid;
+.sc {
+    // Layout
+    &-player {
+        position: relative;
+        .clearfix;
+    }
+    &-trackslist,
+    &-scrubber {
+        .make-xs-column(6);
+    }
+
+    // The main container
+    &-player {
+        background-color: @body-bg;
+    }
+
+    // The playable list
+    &-trackslist {
+        margin: 0;
+        padding: 0;
+        height: 200px;
+        overflow: scroll;
+        li {
+            list-style: none;
+            border-bottom: 1px solid @lines;
+            padding: .2em .6em;
+            &.active a {
+                font-weight: bold;
+                color: white;
+            }
+        }
+    }
+    &-track-duration {
+        float: right;
+    }
+
+
+    // The artworks, no artworks, so get out
+    &-artwork-list { display: none; }
+
+    // The controls
+    &-controls {
+        padding: 1em;
+    }
+    &-play,
+    &-pause {
+        .btn;
+    }
+    &-play {
+
+        border: 1px @lines solid;
+        text-align: center;
+    }
+    &-pause {
+        .btn;
+        border: 1px @lines solid;
+        text-align: center;
+        // display: block !important;
+        // visibility: visible !important;
+    }
+
+    // A little info box that comes other
+    &-info {
+        background-color: rgba(0, 0, 0, 0.8);
+        border: 1px solid @lines;
+        position: absolute;
+        z-index: 1000;
+        padding: 1em;
+        margin: 1em;
+        display: none;
+        opacity: 0;
+        transition: all .3s;
+
+        // When shown
+        &.active {
+            display: block;
+            opacity: 1;
+        }
+        // A close button
+        &-close {
+            font-size: 0;
+            line-height: 0;
+            position: absolute;
+            top: 20px; right: 10px;
+            &:after {
+                font-size: 30px;
+                content: '\d7'
+            }
+        }
+    }
 }
+
 
 
 
