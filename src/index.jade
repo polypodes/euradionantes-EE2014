@@ -2,34 +2,61 @@ extends ./layouts/_default
 
 block content
     main#main-content(role="main")
-        section.live-media
+
+        .live
+            section.live-media
+                ul.nav.nav-tabs
+                    li.active
+                        a(href="#live-media-video", data-toggle="tab") à voir
+                    li
+                        a(href="#live-media-audio", data-toggle="tab") à écouter
+                //- Tabbed content
+                .tab-content
+                    article.tab-pane.active#live-media-video
+                        .video-container
+                            iframe(src="//www.youtube.com/embed/dRjE1JwdDLI", width="420", height="320", frameborder="0")
+
+                    article.tab-pane#live-media-audio
+                        | Du son ici
+
+
+
+            section.live-tweets
+                header
+                    h1 Sur Twitter&nbsp;
+                    .btn-group.btn-group-xs
+                        a(href="https://twitter.com/euradionantes").account.btn.btn-primary.btn-sm @euradionantes
+                        a(href="https://twitter.com/search?q=%23EP2014&src=hash", target="_blank", title="Le hashtag #EP2014").btn.btn-primary.btn-sm #EP2014
+
+                //-
+                //- Think about changing the data-widget-id PLEASE
+                //-
+                a.twitter-timeline(
+                        href="https://twitter.com/shinze",
+                        data-widget-id="463334589499322372",
+                        data-chrome="nofooter transparent noheader",
+                        height="400"
+                    )
+                    | Tweets d’Euradio Nantes
+
+                script !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+
+
+
+        section.cold
             ul.nav.nav-tabs
                 li.active
-                    a(href="#live-media-video", data-toggle="tab") à voir
+                    a(href="#cold-tmblr", data-toggle="tab") en complément
                 li
-                    a(href="#live-media-audio", data-toggle="tab") à écouter
+                    a(href="#cold-rss", data-toggle="tab") ailleurs
             //- Tabbed content
             .tab-content
-                article.tab-pane.active#live-media-video
-                    .video-container
-                        iframe(src="//www.youtube.com/embed/dRjE1JwdDLI", width="420", height="320", frameborder="0")
+                article.tab-pane.active#cold-tmblr
+                    | aaplqspdoq dpod
 
                 article.tab-pane#live-media-audio
                     | Du son ici
-        section.live-tweets
-            h1 Twitter
-                    a(href="#").account.btn.btn-sm @euradionantes
-            //-
-            //- Think about changing the data-widget-id PLEASE
-            //-
-            a.twitter-timeline(
-                    href="https://twitter.com/shinze",
-                    data-widget-id="463334589499322372",
-                    data-chrome="nofooter transparent noheader",
-                    height="400"
-                )
-                | Tweets de @shinze
 
-            script !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
 

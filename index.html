@@ -30,8 +30,8 @@
       </p><![endif]-->
       <header id="main-header" role="header">
         <div id="main-header-banner">
-          <h1>Élections européennes 2014 avec Euradio Nantes</h1>
-          <p>Euradio Nantes, la radio européenne vous propose de suivre les élections européennes 2014 sur trois dates. Du direct, des interviews et vos réactions.</p>
+          <h1>Élections européennes 2014 <small>avec Euradio Nantes</small></h1>
+          <p>Euradio Nantes, la radio européenne vous propose de suivre les élections européennes 2014 sur trois dates. Du direct, des interviews et vos réactions.</p><img src="assets/images/logoEE2014.svg" alt="Élections européennes 22-25 mai 2014 / Agir, Réagir, Accomplir" class="logo-euro">
         </div>
         <nav id="main-nav" role="nav">
           <ul>
@@ -42,23 +42,38 @@
         </nav>
       </header>
       <main id="main-content" role="main">
-        <section class="live-media">
+        <div class="live">
+          <section class="live-media">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#live-media-video" data-toggle="tab">à voir</a></li>
+              <li><a href="#live-media-audio" data-toggle="tab">à écouter</a></li>
+            </ul>
+            <div class="tab-content">
+              <article id="live-media-video" class="tab-pane active">
+                <div class="video-container">
+                  <iframe src="//www.youtube.com/embed/dRjE1JwdDLI" width="420" height="320" frameborder="0"></iframe>
+                </div>
+              </article>
+              <article id="live-media-audio" class="tab-pane">Du son ici</article>
+            </div>
+          </section>
+          <section class="live-tweets">
+            <header>
+              <h1>Sur Twitter&nbsp;</h1>
+              <div class="btn-group btn-group-xs"><a href="https://twitter.com/euradionantes" class="account btn btn-primary btn-sm">@euradionantes</a><a href="https://twitter.com/search?q=%23EP2014&amp;src=hash" target="_blank" title="Le hashtag #EP2014" class="btn btn-primary btn-sm">#EP2014</a></div>
+            </header><a href="https://twitter.com/shinze" data-widget-id="463334589499322372" data-chrome="nofooter transparent noheader" height="400" class="twitter-timeline">Tweets d’Euradio Nantes</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </section>
+        </div>
+        <section class="cold">
           <ul class="nav nav-tabs">
-            <li class="active"><a href="#live-media-video" data-toggle="tab">à voir</a></li>
-            <li><a href="#live-media-audio" data-toggle="tab">à écouter</a></li>
+            <li class="active"><a href="#cold-tmblr" data-toggle="tab">en complément</a></li>
+            <li><a href="#cold-rss" data-toggle="tab">ailleurs</a></li>
           </ul>
           <div class="tab-content">
-            <article id="live-media-video" class="tab-pane active">
-              <div class="video-container">
-                <iframe src="//www.youtube.com/embed/dRjE1JwdDLI" width="420" height="320" frameborder="0"></iframe>
-              </div>
-            </article>
+            <article id="cold-tmblr" class="tab-pane active">aaplqspdoq dpod</article>
             <article id="live-media-audio" class="tab-pane">Du son ici</article>
           </div>
-        </section>
-        <section class="live-tweets">
-          <h1>Twitter<a href="#" class="account btn btn-sm">@euradionantes</a></h1><a href="https://twitter.com/shinze" data-widget-id="463334589499322372" data-chrome="nofooter transparent noheader" height="400" class="twitter-timeline">Tweets de @shinze</a>
-          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         </section>
       </main>
       <footer id="main-footer">Des Partenaires</footer>

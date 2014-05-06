@@ -26,7 +26,7 @@
 // @import "../vendors/bootstrap-less/less/component-animations.less";
 // @import "../vendors/bootstrap-less/less/glyphicons.less";
 // @import "../vendors/bootstrap-less/less/dropdowns.less";
-// @import "../vendors/bootstrap-less/less/button-groups.less";
+@import "../vendors/bootstrap-less/less/button-groups.less";
 // @import "../vendors/bootstrap-less/less/input-groups.less";
 @import "../vendors/bootstrap-less/less/navs.less";
 // @import "../vendors/bootstrap-less/less/navbar.less";
@@ -68,7 +68,7 @@
 // =====================================
 @import "_variables.less";
 
-
+@transluscent: rgba(0, 40, 80, 0.8);
 
 
 //
@@ -129,7 +129,7 @@ img {
 
 
 //
-// Responsive video
+// Common elements and overrides
 // ==========================================================================
 .video-container {
     // http://embedresponsively.com/
@@ -150,38 +150,92 @@ img {
 }
 
 
-//
 // Nav tabs bootstrap override
-// ==========================================================================
+// =====================================
 .nav-tabs {
     text-transform: uppercase;
+    > li > a  {
+        border-radius: 0;
+    }
     .active {
         font-weight: bold;
     }
 }
 
 
-
-
-
-// Main elements
+// Twitter widget overrides
 // =====================================
+.live-tweets {
+    iframe {width: 100%}
+}
+
+
+
+
+
+//
+// Layout
+// ==========================================================================
+
+// Main structure
+#main {
+    &-header,
+    &-content,
+    &-footer {
+        .make-row;
+    }
+
+    // Header
+    &-header {
+        // height: 30em;
+    }
+}
+
+// Main Navigation
+
+
+// Live contents (tweets, video and sound)
+.live {
+    margin-bottom: 3em;
+    .clearfix;
+
+    &-media {
+        .make-sm-column(8);
+    }
+    &-tweets {
+        .make-sm-column(4);
+    }
+}
+
+// RSS and Tmblr content
+.cold {
+    .make-xs-column(12);
+}
+
+
+
+
+
+//
+// Main elements
+// ==========================================================================
+
 #page {
 
 }
 #main-content,
 #main-footer {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 1em;
+    background-color: @transluscent;
+    padding-top: 1.5em;
     margin-bottom: 1em;
 }
 
 
 #main-header {
-    margin-bottom: 2em;
+
 }
 #main-content {
-    .make-row;
+
 }
 #main-footer {}
 
@@ -194,18 +248,29 @@ img {
 // =====================================
 
 
+.logo-euro {
+    width: 300px;
+}
 #main-header {
 
 }
 
 #main-header-banner {
     margin-bottom: 3em;
+    text-align: center;
+    h1 {
+        font-size: 4em;
+    }
+    small {
+        display: block;
+    }
 }
 
 #main-nav {
-    font-size: 240%;
+    font-size: 290%;
     line-height: .8;
     text-transform: uppercase;
+
     strong {
         font-weight: normal;
     }
@@ -223,20 +288,19 @@ img {
     a {
         display: block;
         padding: .5em 0 .5em .5em;
-        border-bottom-width: 4px;
-        border-bottom-style: solid;
-        border-bottom-color: @brand-primary;
         transition: all .3s;
+        background: darken(@transluscent, 10%);
+
+        &:hover, &:focus {
+            background-color: #000;
+        }
 
         &.current {
             color: white;
             position: relative;
-            border-bottom-color: white;
-            background: #000;
+            background: @transluscent;
         }
-        &:hover, &:focus {
-            background-color: #000;
-        }
+
     }
     .month {
         font-size: 60%;
@@ -249,6 +313,7 @@ img {
         font-weight: 400;
         margin-top: .5em;
         text-transform: lowercase;
+        .hidden-xs;
     }
 }
 
@@ -259,22 +324,22 @@ img {
 
 .live {
 
-
     &-tweets {
+        @media(max-width: @screen-xs) {
+            margin-top: 2em;
+            outline: 1px blue solid;
+        }
+        header {
+        }
+        h1, .account {
+
+        }
         h1 {
             font-size: 1.5em;
         }
         .account {
-            float: right;
+            // float: right;
         }
-    }
-
-
-    &-media {
-        .make-sm-column(8);
-    }
-    &-tweets {
-        .make-sm-column(4);
     }
 
 }

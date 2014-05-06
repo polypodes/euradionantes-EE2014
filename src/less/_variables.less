@@ -141,7 +141,7 @@
 @btn-default-bg:                 #fff;
 @btn-default-border:             #ccc;
 
-@btn-primary-color:              #fff;
+@btn-primary-color:              @body-bg;
 @btn-primary-bg:                 @brand-primary;
 @btn-primary-border:             darken(@btn-primary-bg, 5%);
 
@@ -389,7 +389,7 @@
 
 //=== Shared nav styles
 @nav-link-padding:                          10px 40px;
-@nav-link-hover-bg:                         @body-bg;
+@nav-link-hover-bg:                         black;
 
 @nav-disabled-link-color:                   @gray-light;
 @nav-disabled-link-hover-color:             @gray-light;
@@ -397,13 +397,13 @@
 @nav-open-link-hover-color:                 #fff;
 
 //== Tabs
-@nav-tabs-border-color:                     @brand-primary;
+@nav-tabs-border-color:                     darken(@brand-primary, 40%);
 
 @nav-tabs-link-hover-border-color:          @brand-primary;
 
 @nav-tabs-active-link-hover-bg:             @body-bg;
-@nav-tabs-active-link-hover-color:          darken(@brand-primary, 30%);
-@nav-tabs-active-link-hover-border-color:   @brand-primary;
+@nav-tabs-active-link-hover-color:          white;
+@nav-tabs-active-link-hover-border-color:   darken(@brand-primary, 40%);
 
 @nav-tabs-justified-link-border-color:            #ddd;
 @nav-tabs-justified-active-link-border-color:     @body-bg;
