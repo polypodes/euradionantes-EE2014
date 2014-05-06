@@ -204,7 +204,7 @@ iframe {
 
     // The main container
     &-player {
-        background-color: @body-bg;
+        // background-color: @body-bg;
     }
 
     // The playable list
@@ -231,6 +231,8 @@ iframe {
     // The artworks, no artworks, so get out
     &-artwork-list { display: none; }
 
+
+
     // The controls
     &-controls {
         padding: 1em;
@@ -253,6 +255,11 @@ iframe {
     }
 
     // A little info box that comes other
+    &-info-toggle {
+        .btn;
+        border: 1px @lines solid;
+        text-align: center;
+    }
     &-info {
         background-color: rgba(0, 0, 0, 0.8);
         border: 1px solid @lines;
