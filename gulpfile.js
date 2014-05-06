@@ -45,7 +45,7 @@ var paths = {
     build               : './assets',
     src                 : './src',
     js                  : {
-        files               : ['./src/js/*.js', './src/js/vendor/*.js', './src/vendors/soundcloud.custom.player/**/*.js'],
+        files               : ['./src/js/vendor/*.js', './src/vendors/soundcloud.custom.player/**/*.js','./src/js/*.js'],
         output_min          : 'main.min.js',
         dest                : './assets/js',
     },
