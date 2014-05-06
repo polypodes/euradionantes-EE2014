@@ -51,10 +51,12 @@
             <div class="tab-content">
               <article id="live-media-video" class="tab-pane active">
                 <div class="video-container">
-                  <iframe src="//www.youtube.com/embed/dRjE1JwdDLI" width="420" height="320"></iframe>
+                  <iframe src="//www.youtube.com/embed/dRjE1JwdDLI" width="100%" height="320"></iframe>
                 </div>
               </article>
-              <article id="live-media-audio" class="tab-pane">Du son ici</article>
+              <article id="live-media-audio" class="tab-pane">
+                <iframe width="100%" height="450" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/33688808&amp;amp;color=6cceff&amp;amp;auto_play=false&amp;amp;hide_related=false&amp;amp;show_artwork=true"></iframe>
+              </article>
             </div>
           </section>
           <section class="live-tweets">
@@ -71,13 +73,17 @@
             <li><a href="#cold-rss" data-toggle="tab">ailleurs</a></li>
           </ul>
           <div class="tab-content">
-            <article id="cold-tmblr" class="tab-pane active"></article>
+            <article id="cold-tmblr" class="tab-pane active">
+              <div class="container">
+                <h1>En complément</h1>
+              </div>
+            </article>
             <article id="cold-rss" class="tab-pane">Du son ici</article>
           </div>
         </section>
       </main>
       <footer id="main-footer">Des Partenaires</footer>
-      <script src="//cdn.jsdelivr.net/g/jquery,requirejs,bootstrap"></script>
+      <script src="//cdn.jsdelivr.net/g/jquery,bootstrap"></script>
       <script>window.jQuery || document.write('<script src="assets/js/jquery.min.js"><\/script>')</script>
       <script src="assets/js/main.min.js"></script>
     </div>
