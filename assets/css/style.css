@@ -2384,12 +2384,27 @@ img {
     display: none !important;
   }
 }
+.live .tab-content {
+  margin-bottom: 2em;
+}
+.live-tweets header {
+  padding: 1em 0;
+}
 @media (max-width: 480px) {
   .live-tweets {
     margin-top: 2em;
     outline: 1px blue solid;
   }
 }
+.live-tweets .group-link,
+.live-tweets h1 {
+  display: inline-block;
+}
+.live-tweets .group-link {
+  float: right;
+}
 .live-tweets h1 {
   font-size: 1.5em;
+  margin: 0;
+  padding: 0;
 }

@@ -323,19 +323,35 @@ img {
 // ==========================================================================
 
 .live {
+    .tab-content {
+        margin-bottom: 2em;
+    }
+
 
     &-tweets {
+        header {
+            padding: 1em 0;
+        }
+        iframe {
+        }
         @media(max-width: @screen-xs) {
             margin-top: 2em;
             outline: 1px blue solid;
         }
-        header {
+        .group-link, h1 {
+            display: inline-block;
         }
+        .group-link {
+            float: right;
+        }
+
         h1, .account {
 
         }
         h1 {
             font-size: 1.5em;
+            margin: 0;
+            padding: 0;
         }
         .account {
             // float: right;
