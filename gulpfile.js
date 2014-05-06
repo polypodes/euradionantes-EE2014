@@ -122,11 +122,12 @@ gulp.task('style', function () {
 
 gulp.task('js', function() {
     return gulp.src([paths.js.files, paths.js.vendors.files])
+    .pipe(plumber())
     .pipe(concat(paths.js.output_min))
     .pipe(uglify()) // = concat+ugly
     .pipe(gulp.dest(paths.js.dest))
     .pipe(filesize())
-    .on('error', gutil.log)
+    .pipe(browserSync.reload({stream:true}));
 });
 
 // Jade templates
