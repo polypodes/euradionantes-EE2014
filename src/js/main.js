@@ -9,7 +9,7 @@ jQuery('document').ready(function() {
 
     tumblr.init($);
 
-    tumblr.getData('text',function(data) {
+    tumblr.getPosts(function(data) {
         if('OK' == data.meta.msg) {
             for(var i in data.response.posts) {
                 $poster.append($('<article>').html(
@@ -20,5 +20,18 @@ jQuery('document').ready(function() {
             }
         }
     });
+
+    tumblr.getVideos(function(data) {
+        if('OK' == data.meta.msg) {
+            if(0 < data.response.posts.length) {
+                $('#live-media-video .video-container').empty().append($('<iframe>', {
+                    src: "".concat(data.response.posts[0].youtube.embed, "?autoplay=1"),
+                    width: '100%',
+                    height: '320',
+                }));
+            }
+        }
+    });
+
 });
 
