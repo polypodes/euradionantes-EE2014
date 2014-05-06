@@ -45,7 +45,7 @@ var paths = {
     build               : './assets',
     src                 : './src',
     js                  : {
-        files               : ['./src/js/vendor/*.js', './src/vendors/soundcloud.custom.player/**/*.js','./src/js/*.js'],
+        files               : ['./src/js/vendor/*.js', './src/vendors/soundcloud.custom.player/js/*.js','./src/js/*.js'],
         output_min          : 'main.min.js',
         dest                : './assets/js',
     },
@@ -184,7 +184,6 @@ gulp.task( 'watch', function () {
     gulp.watch( paths.layout.watch,     ['templates'] );
     gulp.watch( paths.layout.output,    ['htmlvalidator'] );
     gulp.watch( paths.js.files,         ['js'] );
-    gulp.watch( paths.js.vendors.files, ['js'] );
 });
 
 gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator', 'server', 'watch']);
