@@ -2,7 +2,7 @@
 
 An EuradioNantes website for 2014 european elections.
 
-A Github "Project Pages" based website available at http://euradionantes.lespolypodes.com
+A Github "Project Pages" based website available at http://ep2014.euradionantes.eu
 
 ## Contributions
 
@@ -29,7 +29,7 @@ gulp
 git push origin gh-pages
 ```
 
-Check your immediate changes: http://euradionantes.lespolypodes.com
+Check your immediate changes: http://ep2014.euradionantes.eu
 
 ## DNS config (Registrar)
 
@@ -38,7 +38,7 @@ Check this [Help article from Github](https://help.github.com/articles/setting-u
 Validate it using `dig`:
 
 ```bash
-dig euradionantes.lespolypodes.com +nostats +nocomments +nocmd                                                          14:28  ronan@cider
+dig ep2014.euradionantes.eu +nostats +nocomments +nocmd                                                          14:28  ronan@cider
 
 ; <<>> DiG 9.8.3-P1 <<>> euradionantes.lespolypodes.com +nostats +nocomments +nocmd
 ;; global options: +cmd
