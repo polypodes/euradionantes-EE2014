@@ -36,10 +36,9 @@ jQuery('document').ready(function() {
                 $('#live-media-video .video-container').empty().append($('<div>', {
                     id: video.iframeId,
                 }));
-                video.videoId = 'axQXiNflO-c';
+                video.videoId = data.response.posts[0].youtube.videoId;
                 video.provider = new Youtube();
                 video.provider.init(video.videoId, video.iframeId, video.vars, false);
-
             }
         }
     });

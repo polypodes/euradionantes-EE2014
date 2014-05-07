@@ -62,8 +62,11 @@ var Tumblr = function(){
                     var watch = "youtube.com/watch?v=";
                     if(data.response.posts[i].permalink_url.indexOf(watch) > -1) {
                         var url = data.response.posts[i].permalink_url;
+                        var boom = url.split("=");
+                        url = url.replace(watch,'youtube.com/embed/');
                         data.response.posts[i].youtube = {
-                            embed: url.replace(watch,'youtube.com/embed/'),
+                            embed: url,
+                            videoId: boom[1]
                         }
                     }
                 }
