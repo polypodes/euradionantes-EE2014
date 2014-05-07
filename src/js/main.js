@@ -12,8 +12,8 @@ var video = {
 
 jQuery('document').ready(function() {
 
-    var analyzer = new GoogleAnalyzer();
-    analyzer.init();
+    //var analyzer = new GoogleAnalyzer();
+    //analyzer.init();
 
     var tumblr = new Tumblr(),
     $poster = $('#cold-tmblr .container');
@@ -63,13 +63,13 @@ jQuery('document').ready(function() {
     // Tab click event handlers + consequences on video/audio players
     $('#tab-video').on('click', function(e){
         e.preventDefault();
-        video.provider.player.playVideo();
+        //video.provider.player.playVideo();
         $.scPlayer.stopAll()
     });
 
     $('#tab-audio').on('click', function(e){
         e.preventDefault();
-        video.provider.player.stopVideo();
+        //video.provider.player.stopVideo();
     });
 
     $('#main-nav ul li a').on('click', function(e) {
