@@ -6,7 +6,7 @@ var video = {
     currentPlayer: false,
     iframeClass: 'youtubeIframe',
     iframeId:    'youtubePlayer',
-    vars: {'autoplay':0, 'rel':0, 'showinfo':0, 'egm':0, 'showsearch':0,}
+    vars: {'autoplay':1, 'rel':0, 'showinfo':0, 'egm':0, 'showsearch':0,}
 }
 
 jQuery('document').ready(function() {
