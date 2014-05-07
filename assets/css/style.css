@@ -2660,6 +2660,7 @@ fieldset[disabled] .sc-pause.active {
 #main-nav a {
   display: block;
   padding: .5em 0 .5em .5em;
+  min-height: 3.2em;
   -webkit-transition: all .3s;
   transition: all .3s;
   background: rgba(0, 14, 29, 0.8);
@@ -2673,9 +2674,11 @@ fieldset[disabled] .sc-pause.active {
   position: relative;
   background: rgba(0, 40, 80, 0.8);
 }
+#main-nav .date {
+  font-weight: bold;
+}
 #main-nav .month {
   font-size: 60%;
-  font-weight: normal;
   font-style: normal;
 }
 #main-nav .acc {
@@ -2683,7 +2686,8 @@ fieldset[disabled] .sc-pause.active {
   font-size: 40%;
   font-weight: 400;
   margin-top: .5em;
-  text-transform: lowercase;
+  line-height: 1;
+  text-transform: none;
 }
 @media (max-width: 767px) {
   #main-nav .acc {

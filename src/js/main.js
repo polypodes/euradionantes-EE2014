@@ -24,7 +24,7 @@ jQuery('document').ready(function() {
     tumblr.getVideos(function(data) {
         if('OK' == data.meta.msg) {
             if(0 < data.response.posts.length) {
-                var options = "?autoplay=1&rel=0";
+                var options = "?autoplay=0&rel=0";
                 $('#live-media-video .video-container').empty().append($('<iframe>', {
                     src: "".concat(data.response.posts[0].youtube.embed, options),
                     allowfullscreen: 'true',

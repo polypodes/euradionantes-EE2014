@@ -439,6 +439,7 @@ iframe {
     a {
         display: block;
         padding: .5em 0 .5em .5em;
+        min-height: 3.2em;
         transition: all .3s;
         background: darken(@transluscent, 10%);
 
@@ -453,9 +454,11 @@ iframe {
         }
 
     }
+    .date {
+        font-weight: bold;
+    }
     .month {
         font-size: 60%;
-        font-weight: normal;
         font-style: normal;
     }
     .acc {
@@ -463,7 +466,8 @@ iframe {
         font-size: 40%;
         font-weight: 400;
         margin-top: .5em;
-        text-transform: lowercase;
+        line-height: 1;
+        text-transform: none;
         .hidden-xs;
     }
 }
