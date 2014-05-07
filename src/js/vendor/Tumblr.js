@@ -2,15 +2,15 @@
  * Tumblr API Consumer
  * Author : LesPolypodes.com
  * License : MIT
- * Disclaimer: This depends on jQuery (for $.extends(), mainly)
+ * Disclaimer: This depends on jQuery
  */
 var Tumblr = function(){
 
     var params = {
-            key:    'JF1gaswtw9E1npDP7mtDhBfhgsdxRrhovUBIF52VPJj13hnzFZ',
-            base_url:  'http://api.tumblr.com/v2/blog/euradionantes-ep2014.tumblr.com/',
-            summary_length: 200,
-        };
+        key:            'JF1gaswtw9E1npDP7mtDhBfhgsdxRrhovUBIF52VPJj13hnzFZ',
+        base_url:       'http://api.tumblr.com/v2/blog/euradionantes-ep2014.tumblr.com/',
+        summary_length: 200,
+    };
     var jQuery;
 
     /**
