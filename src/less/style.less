@@ -182,11 +182,6 @@ iframe {
 }
 
 
-// Twitter widget overrides
-// =====================================
-.live-tweets {
-    iframe {width: 100%}
-}
 
 // Soundcloud player
 // =====================================
@@ -359,13 +354,8 @@ iframe {
 .live {
     margin-bottom: 3em;
     .clearfix;
-
-    &-media {
-        .make-md-column(8);
-    }
-    &-tweets {
-        .make-md-column(4);
-    }
+    &-media { .make-md-column(8); }
+    &-tweets { .make-md-column(4); }
 }
 
 // RSS and Tmblr content
@@ -484,39 +474,28 @@ iframe {
 // ==========================================================================
 
 .live {
-    .tab-content {
-        margin-bottom: 2em;
-    }
+    .tab-content { margin-bottom: 2em; }
 
-
+    &-intro { font-size: 1.3em; }
     &-tweets {
-        header {
-            padding: 1em 0;
-        }
-        iframe {
-        }
+        header { padding: 1em 0; }
+        iframe {width: 100%}
+
         @media(max-width: @screen-xs) {
             margin-top: 2em;
             outline: 1px blue solid;
         }
-        .group-link, h1 {
+
+        .group-link,
+        h1 {
             display: inline-block;
-        }
-        .group-link {
-            float: right;
-        }
-
-        h1, .account {
-
         }
         h1 {
             font-size: 1.5em;
             margin: 0;
             padding: 0;
         }
-        .account {
-            // float: right;
-        }
+        .group-link { float: right; }
     }
 
 }

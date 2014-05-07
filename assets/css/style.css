@@ -2257,9 +2257,6 @@ iframe {
 .nav-tabs .active {
   font-weight: bold;
 }
-.live-tweets iframe {
-  width: 100%;
-}
 .sc-player {
   position: relative;
   min-height: 500px;
@@ -2696,8 +2693,14 @@ fieldset[disabled] .sc-pause.active {
 .live .tab-content {
   margin-bottom: 2em;
 }
+.live-intro {
+  font-size: 1.3em;
+}
 .live-tweets header {
   padding: 1em 0;
+}
+.live-tweets iframe {
+  width: 100%;
 }
 @media (max-width: 480px) {
   .live-tweets {
@@ -2709,11 +2712,11 @@ fieldset[disabled] .sc-pause.active {
 .live-tweets h1 {
   display: inline-block;
 }
-.live-tweets .group-link {
-  float: right;
-}
 .live-tweets h1 {
   font-size: 1.5em;
   margin: 0;
   padding: 0;
+}
+.live-tweets .group-link {
+  float: right;
 }
