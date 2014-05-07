@@ -12,8 +12,10 @@ var video = {
 
 jQuery('document').ready(function() {
 
+    /*
     var analyzer = new GoogleAnalyzer();
     analyzer.init();
+    */
 
     var tumblr = new Tumblr(),
     $poster = $('#cold-tmblr .container');
