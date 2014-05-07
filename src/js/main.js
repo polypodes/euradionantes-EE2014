@@ -5,7 +5,7 @@ jQuery('document').ready(function() {
     analyzer.init();
 
     var tumblr = new Tumblr(),
-    $poster = $('#cold-tmblr');
+    $poster = $('#cold-tmblr .container');
 
     tumblr.init($);
 
