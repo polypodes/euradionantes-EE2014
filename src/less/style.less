@@ -83,6 +83,8 @@
 @import "_variables.less";
 
 @transluscent: rgba(0, 40, 80, 0.8);
+@transluscent_ie: rgb(0, 40, 80);
+@lines: darken(@brand-primary, 40%);
 
 
 //
@@ -180,19 +182,149 @@ iframe {
 }
 
 
-// Twitter widget overrides
-// =====================================
-.live-tweets {
-    iframe {width: 100%}
-}
 
 // Soundcloud player
 // =====================================
 // https://soundcloud.com/euradionantes/sets/ep2014
 
-.sc-player {
-    outline: 1px blue solid;
+.sc {
+    &-player {
+        position: relative;
+        min-height: 500px;
+        &.playing {
+            .sc-pause {
+                display: inline-block !important;
+                visibility: visible !important;
+            }
+            .sc-play {
+                .hidden;
+            }
+        }
+    }
+
+    // Info box
+    &-info {
+        padding: 2em 0;
+        h1, h2 {
+            font-size: 140%;
+            margin: 0 0 .3em 0;
+        }
+    }
+
+    &-controls { margin-bottom: 2em; }
+
+
+    // Time viewer
+    &-scrubber {
+        position: relative;
+        margin-bottom: 1em;
+    }
+    &-time-span {
+        position: relative;
+        background-color: #999;
+        img {
+            display: block;
+            // opacity: .5;
+        }
+    }
+    &-waveform-container {
+        position: relative;
+        height: 100%;
+        // min-height: 120px;
+        z-index: 100;
+    }
+    &-buffer,
+    &-played {
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%;
+        z-index: 99;
+    }
+    &-buffer { background-color: #999; }
+    &-played { background-color: darken(@brand-primary, 40%); }
+    &-time-indicators {
+        .btn;
+        .btn-xs;
+        background-color: black;
+        position: absolute;
+        top: 5px; right: 5px;
+        z-index: 1000;
+    }
+
+    // The playable list
+    &-trackslist {
+        max-height: 300px;
+        overflow: scroll;
+        margin: 0;
+        padding: 0;
+        a {
+            display: block;
+            width: 90%;
+            float: left;
+        }
+        li {
+            list-style: none;
+            border-bottom: 1px solid @lines;
+            padding: .2em .6em;
+            .clearfix;
+            &.active a {
+                font-weight: bold;
+                color: white;
+            }
+        }
+    }
+    &-track-duration {
+        float: right;
+    }
+
+    // The artworks, no artworks, so get out
+    &-artwork-list { display: none; }
+
+
+
+    // The controls
+    &-controls {
+        padding: 1em;
+        text-align: center;
+    }
+    &-play,
+    &-pause {
+        .btn;
+        .btn-lg;
+        .btn-primary;
+        font-size: 220%;
+    }
+    &-play:before {
+        content: '\25B6';
+        font-size: 60%;
+        padding-right: .3em;
+    }
+    &-pause.hidden {
+        display: block;
+        visibility: visible;
+    }
+
+
+
+    // A little info box that comes other
+    &-info-toggle {
+        display: none;
+    }
+    &-info {
+        z-index: 1000;
+
+        // When shown
+        &.active {
+            display: block;
+            opacity: 1;
+        }
+        // A close button
+        &-close {
+            display: none;
+        }
+    }
 }
+
 
 
 
@@ -222,18 +354,14 @@ iframe {
 .live {
     margin-bottom: 3em;
     .clearfix;
-
-    &-media {
-        .make-sm-column(8);
-    }
-    &-tweets {
-        .make-sm-column(4);
-    }
+    &-media { .make-md-column(8); }
+    &-tweets { .make-md-column(4); }
 }
 
 // RSS and Tmblr content
 .cold {
     .make-xs-column(12);
+    margin-bottom: 3em;
 }
 
 
@@ -251,7 +379,6 @@ iframe {
 #main-footer {
     background-color: @transluscent;
     padding-top: 1.5em;
-    margin-bottom: 1em;
 }
 
 
@@ -261,7 +388,11 @@ iframe {
 #main-content {
 
 }
-#main-footer {}
+#main-footer {
+    text-align: center;
+    background-color: darken(@transluscent, 10%);
+    padding-bottom: 1.5em;
+}
 
 
 
@@ -276,18 +407,23 @@ iframe {
     width: 300px;
 }
 #main-header {
-
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 #main-header-banner {
     margin-bottom: 3em;
     text-align: center;
+    text-shadow: 0 3px 3px #000;
+    padding:1em;
+
     h1 {
         font-size: 4em;
+        font-weight: bold;
     }
     small {
         display: block;
     }
+    img { margin: 0 20px; }
 }
 
 #main-nav {
@@ -312,6 +448,7 @@ iframe {
     a {
         display: block;
         padding: .5em 0 .5em .5em;
+        min-height: 3.2em;
         transition: all .3s;
         background: darken(@transluscent, 10%);
 
@@ -326,9 +463,11 @@ iframe {
         }
 
     }
+    .date {
+        font-weight: bold;
+    }
     .month {
         font-size: 60%;
-        font-weight: normal;
         font-style: normal;
     }
     .acc {
@@ -336,7 +475,8 @@ iframe {
         font-size: 40%;
         font-weight: 400;
         margin-top: .5em;
-        text-transform: lowercase;
+        line-height: 1;
+        text-transform: none;
         .hidden-xs;
     }
 }
@@ -347,39 +487,44 @@ iframe {
 // ==========================================================================
 
 .live {
-    .tab-content {
-        margin-bottom: 2em;
-    }
+    .tab-content { margin-bottom: 2em; }
 
-
+    &-intro { font-size: 1.3em; }
     &-tweets {
-        header {
-            padding: 1em 0;
-        }
-        iframe {
-        }
+        header { padding: 1em 0; }
+        iframe {width: 100%}
+
         @media(max-width: @screen-xs) {
             margin-top: 2em;
-            outline: 1px blue solid;
         }
-        .group-link, h1 {
+
+        .group-link,
+        h1 {
             display: inline-block;
-        }
-        .group-link {
-            float: right;
-        }
-
-        h1, .account {
-
         }
         h1 {
             font-size: 1.5em;
             margin: 0;
             padding: 0;
         }
-        .account {
-            // float: right;
-        }
+        .group-link { float: right; }
     }
 
+}
+
+
+//
+// Cold elements
+// ==========================================================================
+.cold {
+    .hidden;
+}
+#cold {
+    &-tmblr {
+        .container { .make-row; }
+        article {
+            .make-sm-column(4);
+            h1 { font-size: 120%; }
+        }
+    }
 }
