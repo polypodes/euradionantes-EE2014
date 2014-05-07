@@ -7,18 +7,18 @@ block content
             section.live-media
                 p.lead.live-intro Référence au discours fondateur de Robert Schuman en 1950, <strong>le 9 mai</strong> est une date historique : c’est la Journée de l’Europe ! C’est aussi le rendez-vous immanquable de la société civile européenne pour les Etats Généraux de l’Europe. Euradionantes vous fait vivre cette journée spéciale ponctuée de nombreux événements.
                 ul.nav.nav-tabs
-                    li
-                        a(href="#live-media-video", id='tab-video' data-toggle="tab") à voir
                     li.active
+                        a(href="#live-media-video", id='tab-video' data-toggle="tab") à voir
+                    li
                         a(href="#live-media-audio", id='tab-audio' data-toggle="tab") à écouter
                 //- Tabbed content
                 .tab-content
-                    article.tab-pane#live-media-video
+                    article.tab-pane.active#live-media-video
                         .video-container
 
-                    article.tab-pane.active#live-media-audio
-                        a(href="https://soundcloud.com/musicdotexe").sc-player My new dub track
-                        //- a(href="https://soundcloud.com/euradionantes/sets/ep2014").sc-player My new dub track
+                    article.tab-pane#live-media-audio
+                        //- a(href="https://soundcloud.com/musicdotexe").sc-player My new dub track
+                        a(href="https://soundcloud.com/euradionantes/sets/ep2014").sc-player Notre sélection EP2014
 
 
 
@@ -53,9 +53,8 @@ block content
                     a(href="#cold-rss", data-toggle="tab") ailleurs
             //- Tabbed content
             .tab-content
-                span.tab-pane.active#cold-tmblr
+                div.tab-pane.active#cold-tmblr
                     .container
-                        h1 En complément
 
 
                 article.tab-pane#cold-rss
