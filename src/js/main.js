@@ -44,6 +44,19 @@ jQuery('document').ready(function() {
         }
     });
 
+    // Tab click event handlers + consequences on video/audio players
+    $('#tab-video').on('click', function(e){
+        e.preventDefault();
+        video.provider.player.playVideo();
+        $.scPlayer.stopAll()
+    });
+
+    $('#tab-audio').on('click', function(e){
+        e.preventDefault();
+        video.provider.player.stopVideo();
+    });
+
+
 
 });
 
@@ -52,6 +65,5 @@ jQuery('document').ready(function() {
 var onYouTubeIframeAPIReady = function() {
     video.provider.player = video.provider.setPlayer();
     video.ready = true;
-    $('#tab-video').on('click', function(e){ e.preventDefault(); video.provider.player.playVideo();});
-    $('#tab-audio').on('click', function(e){ e.preventDefault(); video.provider.player.stopVideo();});
 }
+
