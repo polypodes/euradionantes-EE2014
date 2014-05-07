@@ -2627,10 +2627,11 @@ fieldset[disabled] .sc-pause.active {
 #main-footer {
   background-color: rgba(0, 40, 80, 0.8);
   padding-top: 1.5em;
-  margin-bottom: 1em;
 }
 #main-footer {
   text-align: center;
+  background-color: rgba(0, 14, 29, 0.8);
+  padding-bottom: 1.5em;
 }
 .logo-euro {
   width: 300px;
