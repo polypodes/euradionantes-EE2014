@@ -58,7 +58,7 @@ jQuery('document').ready(function() {
         }
     });
 
-    $('#live-media-video .video-container').empty().html('<iframe src="http://www.glowbl.com/EGE" frameborder="0" style="width:100% height:100%"/>');
+    // $('#live-media-video .video-container').empty().html('<iframe src="http://www.glowbl.com/EGE" frameborder="0" style="width:100% height:100%"/>');
 
     // Tab click event handlers + consequences on video/audio players
     $('#tab-video').on('click', function(e){
