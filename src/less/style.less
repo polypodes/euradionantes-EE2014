@@ -419,11 +419,19 @@ iframe {
     h1 {
         font-size: 4em;
         font-weight: bold;
+        // margin-bottom: 2em;
+        @media(max-width: @screen-xs) {
+            font-size: 3em;
+        }
     }
     small {
         display: block;
     }
-    img { margin: 0 20px; }
+    img {
+        @media(min-width: @screen-md) {
+            margin: 0 20px;
+        }
+    }
 }
 
 #main-nav {

@@ -2649,11 +2649,18 @@ fieldset[disabled] .sc-pause.active {
   font-size: 4em;
   font-weight: bold;
 }
+@media (max-width: 480px) {
+  #main-header-banner h1 {
+    font-size: 3em;
+  }
+}
 #main-header-banner small {
   display: block;
 }
-#main-header-banner img {
-  margin: 0 20px;
+@media (min-width: 992px) {
+  #main-header-banner img {
+    margin: 0 20px;
+  }
 }
 #main-nav {
   font-size: 290%;
