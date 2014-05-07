@@ -361,6 +361,7 @@ iframe {
 // RSS and Tmblr content
 .cold {
     .make-xs-column(12);
+    margin-bottom: 3em;
 }
 
 
@@ -502,4 +503,21 @@ iframe {
         .group-link { float: right; }
     }
 
+}
+
+
+//
+// Cold elements
+// ==========================================================================
+.cold {
+
+}
+#cold {
+    &-tmblr {
+        .container { .make-row; }
+        article {
+            .make-sm-column(4);
+            h1 { font-size: 120%; }
+        }
+    }
 }
