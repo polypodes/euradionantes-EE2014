@@ -7,6 +7,7 @@ var video = {
     iframeClass: 'youtubeIframe',
     iframeId:    'youtubePlayer',
     vars: {'autoplay':1, 'rel':0, 'showinfo':0, 'egm':0, 'showsearch':0,}
+
 }
 
 jQuery('document').ready(function() {
@@ -44,6 +45,7 @@ jQuery('document').ready(function() {
 
     tumblr.getVideos(function(data) {
         if('OK' == data.meta.msg) {
+            /*
             if(0 < data.response.posts.length) {
                 $('#live-media-video .video-container').empty().append($('<div>', {
                     id: video.iframeId,
@@ -52,8 +54,11 @@ jQuery('document').ready(function() {
                 video.provider = new Youtube();
                 video.provider.init(video.videoId, video.iframeId, video.vars, false);
             }
+            */
         }
     });
+
+    // $('#live-media-video .video-container').empty().html('<iframe src="http://www.glowbl.com/EGE" frameborder="0" style="width:100% height:100%"/>');
 
     // Tab click event handlers + consequences on video/audio players
     $('#tab-video').on('click', function(e){
