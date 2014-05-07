@@ -65,13 +65,13 @@ jQuery('document').ready(function() {
     // Tab click event handlers + consequences on video/audio players
     $('#tab-video').on('click', function(e){
         e.preventDefault();
-        video.provider.player.playVideo();
+        //video.provider.player.playVideo();
         $.scPlayer.stopAll()
     });
 
     $('#tab-audio').on('click', function(e){
         e.preventDefault();
-        video.provider.player.stopVideo();
+        //video.provider.player.stopVideo();
     });
 
     $('#main-nav ul li a').on('click', function(e) {
