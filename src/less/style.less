@@ -83,6 +83,7 @@
 @import "_variables.less";
 
 @transluscent: rgba(0, 40, 80, 0.8);
+@transluscent_ie: rgb(0, 40, 80);
 @lines: darken(@brand-primary, 40%);
 
 
@@ -192,31 +193,85 @@ iframe {
 // https://soundcloud.com/euradionantes/sets/ep2014
 
 .sc {
-    // Layout
     &-player {
         position: relative;
-        .clearfix;
-    }
-    &-trackslist,
-    &-scrubber {
-        .make-xs-column(6);
+        min-height: 500px;
+        &.playing {
+            .sc-pause {
+                display: inline-block !important;
+                visibility: visible !important;
+            }
+            .sc-play {
+                .hidden;
+            }
+        }
     }
 
-    // The main container
-    &-player {
-        // background-color: @body-bg;
+    // Info box
+    &-info {
+        padding: 2em 0;
+        h1, h2 {
+            font-size: 140%;
+            margin: 0 0 .3em 0;
+        }
+    }
+
+    &-controls { margin-bottom: 2em; }
+
+
+    // Time viewer
+    &-scrubber {
+        position: relative;
+        margin-bottom: 1em;
+    }
+    &-time-span {
+        position: relative;
+        background-color: #999;
+        img {
+            display: block;
+            // opacity: .5;
+        }
+    }
+    &-waveform-container {
+        position: relative;
+        height: 100%;
+        // min-height: 120px;
+        z-index: 100;
+    }
+    &-buffer,
+    &-played {
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%;
+        z-index: 99;
+    }
+    &-buffer { background-color: #999; }
+    &-played { background-color: darken(@brand-primary, 40%); }
+    &-time-indicators {
+        .btn;
+        .btn-xs;
+        background-color: black;
+        position: absolute;
+        top: 5px; right: 5px;
+        z-index: 1000;
     }
 
     // The playable list
     &-trackslist {
+        max-height: 300px;
+        overflow: scroll;
         margin: 0;
         padding: 0;
-        height: 200px;
-        overflow: scroll;
+        a {
+            display: block;
+            width: 90%;
+            float: left;
+        }
         li {
             list-style: none;
             border-bottom: 1px solid @lines;
             padding: .2em .6em;
+            .clearfix;
             &.active a {
                 font-weight: bold;
                 color: white;
@@ -227,7 +282,6 @@ iframe {
         float: right;
     }
 
-
     // The artworks, no artworks, so get out
     &-artwork-list { display: none; }
 
@@ -236,40 +290,33 @@ iframe {
     // The controls
     &-controls {
         padding: 1em;
+        text-align: center;
     }
     &-play,
     &-pause {
         .btn;
+        .btn-lg;
+        .btn-primary;
+        font-size: 220%;
     }
-    &-play {
+    &-play:before {
+        content: '\25B6';
+        font-size: 60%;
+        padding-right: .3em;
+    }
+    &-pause.hidden {
+        display: block;
+        visibility: visible;
+    }
 
-        border: 1px @lines solid;
-        text-align: center;
-    }
-    &-pause {
-        .btn;
-        border: 1px @lines solid;
-        text-align: center;
-        // display: block !important;
-        // visibility: visible !important;
-    }
+
 
     // A little info box that comes other
     &-info-toggle {
-        .btn;
-        border: 1px @lines solid;
-        text-align: center;
+        display: none;
     }
     &-info {
-        background-color: rgba(0, 0, 0, 0.8);
-        border: 1px solid @lines;
-        position: absolute;
         z-index: 1000;
-        padding: 1em;
-        margin: 1em;
-        display: none;
-        opacity: 0;
-        transition: all .3s;
 
         // When shown
         &.active {
@@ -278,14 +325,7 @@ iframe {
         }
         // A close button
         &-close {
-            font-size: 0;
-            line-height: 0;
-            position: absolute;
-            top: 20px; right: 10px;
-            &:after {
-                font-size: 30px;
-                content: '\d7'
-            }
+            display: none;
         }
     }
 }
@@ -321,10 +361,10 @@ iframe {
     .clearfix;
 
     &-media {
-        .make-sm-column(8);
+        .make-md-column(8);
     }
     &-tweets {
-        .make-sm-column(4);
+        .make-md-column(4);
     }
 }
 
