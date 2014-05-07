@@ -2629,6 +2629,9 @@ fieldset[disabled] .sc-pause.active {
   padding-top: 1.5em;
   margin-bottom: 1em;
 }
+#main-footer {
+  text-align: center;
+}
 .logo-euro {
   width: 300px;
 }
