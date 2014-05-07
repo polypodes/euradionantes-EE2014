@@ -2,30 +2,84 @@
  * Youtube API Consumer
  * Author : LesPolypodes.com
  * License : MIT
+ * Documentation: https://developers.google.com/youtube/iframe_api_reference
  */
-var Youtube = function(){
+var Youtube = function()
+{
+
+    var params = {
+        playerId :      false,
+        videoId :       false,
+        vars :          {},
+    };
+
+    var player = false;
+
 
     /**
-     * Play/Pause any iframe-included Youtube Player
+     * initialize parameters
+     * @param string videoId    Youtube video unique ID
+     * @param string playerId   container (HTML Element) id
+     * @param Obj vars          Youtube Iframe Api parameters
+     * @param boolean play      video autoplay
      *
-     * @param string (container's) id
-     * @param boolean play ( = play/pause)
      */
-    function toggleVideo(id, play) {
-        // if state == 'hide', hide. Else: show video
-        var container = document.getElementById(id);
-        var iframe = container.getElementsByTagName("iframe")[0].contentWindow;
-        var func = play ? 'pauseVideo' : 'playVideo';
+    var init = function(videoId, playerId, vars, play) {
+        params.videoId = videoId;
+        params.playerId = playerId;
+        params.vars = vars;
 
-        iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
+
+    /**
+     * onYouTubeIframeAPIReady event handler target
+     * Set YT.Player
+     */
+    var setPlayer = function() {
+        player = new YT.Player(params.playerId, {
+            videoId: params.videoId,
+            events: {
+                'onReady': onPlayerReady,
+            },
+            playerVars: params.vars
+        });
+        return player;
+    }
+
+    /**
+     * YT.Player.events.onReady event handler target
+     * Play video
+     * Note we can pause the player using Youtube.player.stopVideo()
+     */
+    var onPlayerReady = function(event) {
+        if(params.vars.autoplay == 1) {
+            event.target.playVideo();
+        }
+    }
+
+    var stopVideo = function() {
+        player.stopVideo();
+    }
+    var playVideo = function() {
+        player.playVideo();
+    }
+
+
 
     /**
      * Exposes public methods only
      */
     return {
-        init:init,
-        toggleVideo: toggleVideo,
+        params:     params,
+        player:     player,
+        setPlayer:  setPlayer,
+        init:       init,
+        playVideo:  playVideo,
+        stopVideo:  stopVideo,
     }
 
 }
