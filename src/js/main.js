@@ -24,12 +24,22 @@ jQuery('document').ready(function() {
         if('OK' == data.meta.msg) {
             $poster = $('#cold-tmblr');
             for(var i in data.response.posts) {
-                $poster.append($('<article>').html(
-                    '<h1>' + data.response.posts[i].title + '</h1>' +
-                    data.response.posts[i].summary
+                $poster.append($('<article data-index="'+i+'">').html(
+                    '<div class="togglable summary" style="display:block">'
+                    + '<h1><a href="#">' + data.response.posts[i].title + '</a></h1>'
+                    + data.response.posts[i].summary
+                    + '</div><div class="togglable body" style="display:none">'
+                    + '<h1><a href="#">' + data.response.posts[i].title + '</a></h1>'
+                    + data.response.posts[i].body
+                    + '</div>'
                     )
                 );
             }
+
+            $('article .togglable h1 a').on('click', function(e){
+                e.preventDefault();
+                $('.togglable', $(this).parent().parent().parent()).toggle();
+            });
         }
     });
 
@@ -58,7 +68,9 @@ jQuery('document').ready(function() {
         video.provider.player.stopVideo();
     });
 
-
+    $('#main-nav ul li a').on('click', function(e) {
+        e.preventDefault();
+    });
 
 });
 
