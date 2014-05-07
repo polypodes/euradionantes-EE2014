@@ -53,10 +53,14 @@ var Tumblr = function(){
      var decorate = function(data) {
         if(0 < data.response.posts.length) {
             for(var i in data.response.posts) {
+
+                // TEXTS
                 if(data.response.posts[i].body) {
                     var html = data.response.posts[i].body;
                     data.response.posts[i].summary = getSummary(html, params.summary_length);
                 }
+
+                // VIDEOS
                 if(data.response.posts[i].permalink_url) {
                     // we allow http/https/www/no www URLs:
                     var watch = "youtube.com/watch?v=";
