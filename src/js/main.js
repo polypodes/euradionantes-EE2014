@@ -67,7 +67,9 @@ jQuery('document').ready(function() {
         video.provider.player.stopVideo();
     });
 
-
+    $('#main-nav ul li a').on('click', function(e) {
+        e.preventDefault();
+    });
 
 });
 
