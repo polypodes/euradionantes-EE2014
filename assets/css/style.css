@@ -2571,6 +2571,31 @@ fieldset[disabled] .sc-pause.active {
   margin-left: -15px;
   margin-right: -15px;
 }
+.logos {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .logos {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+.pres {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .pres {
+    float: left;
+    width: 58.33333333%;
+  }
+}
 .live {
   margin-bottom: 3em;
 }
@@ -2662,31 +2687,6 @@ fieldset[disabled] .sc-pause.active {
 @media (min-width: 992px) {
   #main-header-banner img {
     margin: 0 20px;
-  }
-}
-.logos {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-  text-align: center;
-}
-@media (min-width: 992px) {
-  .logos {
-    float: left;
-    width: 41.66666667%;
-  }
-}
-.pres {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-@media (min-width: 992px) {
-  .pres {
-    float: left;
-    width: 58.33333333%;
   }
 }
 #main-nav {
