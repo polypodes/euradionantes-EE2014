@@ -4,9 +4,50 @@ An EuradioNantes website for 2014 european elections.
 
 A Github "Project Pages" based website available at http://ep2014.euradionantes.eu
 
+
+## PROD/PREPROD environments
+
+### Remote repos:
+
+- `origin`: https://github.com/polypodes/euradionantes-EE2014
+- `preprod`: https://github.com/polypodes/euradionantes-EE2014-preprod
+
+Other branches are not used for now.
+
+### PREPROD usage:
+
+Remember not to push into `origin` : `git push preprod gh-pages` only
+
+```bash
+git checkout gh-pages
+git pull origin gh-pages
+git remote add preprod https://github.com/polypodes/euradionantes-EE2014-preprod.git
+git fetch preprod
+(coding...)
+(commiting...)
+git push preprod gh-pages
+```
+
+Mind the CNAME file that has changed from `ep2014.euradionantes.eu` to `euradionantes.lespolypodes.com`
+
+### PRE-Production deployement ([Github pages](https://pages.github.com/))
+
+```bash
+git push preprod gh-pages
+```
+
+### Production deployement ([Github pages](https://pages.github.com/))
+
+```bash
+(edit CNAME, changing value into `ep214.euradionantes.eu`
+git add CNAME
+git commit (...)
+git push origin gh-pages
+```
+
 ## Contributions
 
-Contributions must be pushed into the __[gh-pages branch](https://github.com/polypodes/euradionantes-EE2014/tree/gh-pages) as the main branch__
+Contributions must be pushed into the __[gh-pages branch](https://github.com/polypodes/euradionantes-EE2014-preprod/tree/gh-pages) as the main branch__
 
 ## Installing packages & dependencies ([Bower](http://bower.io/))
 
@@ -23,11 +64,6 @@ npm install
 gulp
 ```
 
-## Deployement ([Github pages](https://pages.github.com/))
-
-```bash
-git push origin gh-pages
-```
 
 Check your immediate changes: http://ep2014.euradionantes.eu
 
