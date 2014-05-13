@@ -33,17 +33,20 @@ Mind the CNAME file that has changed from `ep2014.euradionantes.eu` to `euradion
 ### PRE-Production deployement ([Github pages](https://pages.github.com/))
 
 ```bash
+(check CNAME + robots.txt value)
 git push preprod gh-pages
 ```
+
+Check your immediate changes: http://euradionantes.lespolypodes.com
 
 ### Production deployement ([Github pages](https://pages.github.com/))
 
 ```bash
-(edit CNAME, changing value into `ep214.euradionantes.eu`
-git add CNAME
-git commit (...)
+(check CNAME + robots.txt value)
 git push origin gh-pages
 ```
+
+Check your immediate changes: http://ep2014.euradionantes.eu
 
 ## Contributions
 
@@ -64,8 +67,6 @@ npm install
 gulp
 ```
 
-
-Check your immediate changes: http://ep2014.euradionantes.eu
 
 ## DNS config (Registrar)
 
