@@ -2,11 +2,93 @@ extends ./layouts/_default
 
 block content
     main#main-content.tab-content(role="main")
-        .tab-pane#date-first
-            include ./layouts/modules/date-first
 
+        // May 9
+        .tab-pane#date-first
+            section.live
+                .live-media
+                    h1.sr-only Le 9 mai
+                    p.lead.live-intro Référence au discours fondateur de Robert Schuman en 1950, <strong>le 9 mai</strong> est une date historique : c’est la Journée de l’Europe ! C’est aussi le rendez-vous immanquable de la société civile européenne pour les Etats Généraux de l’Europe. Euradionantes vous fait vivre cette journée spéciale ponctuée de nombreux événements.
+                    ul.nav.nav-tabs
+                        li.active
+                            a(href="#live-media-video", id='tab-video' data-toggle="tab") à voir
+                        li
+                            a(href="#live-media-audio", id='tab-audio' data-toggle="tab") à écouter
+                    //- Tabbed content
+                    .tab-content
+                        article.tab-pane.active#live-media-video
+                            h1.sr-only Vidéo du 9 mai
+                            a(href="http://www.glowbl.com/EGE", target="_blank", title="Nouvelle fenêtre")
+                                img(src="assets/images/placeholder-video.jpg", alt="Lire")
+
+                        article.tab-pane#live-media-audio
+                            h1.sr-only La sélection audio du 9 mai
+                            a(href="https://soundcloud.com/euradionantes/sets/ep2014").sc-player Notre sélection EP2014
+
+                section.live-tweets
+                    include ./layouts/modules/twitter
+
+
+        // May 15
         .tab-pane.active#date-second
-            .live
-                | loremmqlsd
+            section.live
+                .live-media
+                    h1.sr-only Le 15 mai
+                    p.lead.live-intro Pour la première fois de l’histoire, le vote des citoyens européens va influer sur la nomination du Président de la Commission européenne. Un grand rendez-vous démocratique à suivre sur Euradionantes !
+                    ul.nav.nav-tabs
+                        li.active
+                            a(href="#live-media-video-15", id='tab-video-15' data-toggle="tab") à voir
+                        li
+                            a(href="#live-media-audio-15", id='tab-audio-15' data-toggle="tab") à écouter
+                    //- Tabbed content
+                    .tab-content
+                        article.tab-pane.active#live-media-video-15
+                            h1.sr-only Vidéo du 15 mai
+                            a(href="http://www.glowbl.com/EGE", target="_blank", title="Nouvelle fenêtre")
+                                img(src="assets/images/placeholder-video.jpg", alt="Lire")
+
+                        article.tab-pane#live-media-audio-15
+                            h1.sr-only La sélection audio du 15 mai
+                            a(href="https://soundcloud.com/euradionantes/sets/ep2014").sc-player Notre sélection EP2014
+
+                section.live-tweets
+                    include ./layouts/modules/twitter
+
+            .cold
+                ul.nav.nav-tabs
+                    li.active
+                        a(href="#cold-tmblr-15", data-toggle="tab") en complément
+                    li
+                        a(href="#cold-rss-15", data-toggle="tab") ailleurs
+                //- Tabbed content
+                .tab-content
+                    div.tab-pane.active#cold-tmblr-15
+                        .container
+
+
+                    article.tab-pane#cold-rss-15
+                        | Flux RSS
+
+        // May 25
         .tab-pane#date-third
-            | Lorem B
+            section.live
+                .live-media
+                    h1.sr-only Le 25 mai
+                    p.lead.live-intro Le 25 mai, les citoyens d’Europe sont appelés aux urnes pour élire leurs représentants au Parlement européen. Euradionantes en partenariat avec Radio Fidélité vous donne rendez-vous pour une grande soirée électorale, en direct et en public : analyses des résultats, invités, débats, interviews de personnalités politiques de tout le continent…
+                    ul.nav.nav-tabs
+                        li.active
+                            a(href="#live-media-video-25", id='tab-video-25' data-toggle="tab") à voir
+                        li
+                            a(href="#live-media-audio-25", id='tab-audio-25' data-toggle="tab") à écouter
+                    //- Tabbed content
+                    .tab-content
+                        article.tab-pane.active#live-media-video-25
+                            h1.sr-only Vidéo du 25 mai
+                            a(href="http://www.glowbl.com/EGE", target="_blank", title="Nouvelle fenêtre")
+                                img(src="http://placehold.it/750x530/6cceff/ffffff&text=%C3%80%20venir", alt="À venir")
+                        article.tab-pane#live-media-audio-25
+                            h1.sr-only La sélection audio du 25 mai
+                            img(src="http://placehold.it/750x530/6cceff/ffffff&text=%C3%80%20venir", alt="À venir")
+
+                section.live-tweets
+                    include ./layouts/modules/twitter

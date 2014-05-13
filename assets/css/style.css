@@ -2774,10 +2774,6 @@ fieldset[disabled] .sc-pause.active {
 .live-tweets .group-link {
   float: right;
 }
-.cold {
-  display: none !important;
-  visibility: hidden !important;
-}
 #cold-tmblr .container {
   margin-left: -15px;
   margin-right: -15px;
