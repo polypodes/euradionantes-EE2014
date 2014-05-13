@@ -463,6 +463,11 @@ iframe {
     li {
         display: table-cell;
         // width: 33.333333%;
+        &.active a {
+            color: white;
+            position: relative;
+            background: @transluscent;
+        }
     }
     a {
         display: block;
@@ -474,13 +479,6 @@ iframe {
         &:hover, &:focus {
             background-color: #000;
         }
-
-        &.current {
-            color: white;
-            position: relative;
-            background: @transluscent;
-        }
-
     }
     .date {
         font-weight: bold;

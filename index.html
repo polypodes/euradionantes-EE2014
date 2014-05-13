@@ -38,46 +38,52 @@
         </div>
         <nav id="main-nav" role="navigation">
           <ul>
-            <li><a href="#" class="current"><span class="date">9 <b class="month">mai</b></span><span class="acc">Journée de l’Europe / Etats Généraux de l’Europe</span></a></li>
-            <li><a href="#"><span class="date">15 <b class="month">mai</b></span><span class="acc">Grand débat entre les candidats à la présidence de la Commission européenne</span></a></li>
-            <li><a href="#"><span class="date">25 <b class="month">mai</b></span><span class="acc">Soirée électorale européenne</span></a></li>
+            <li><a href="#date-first" data-toggle="tab"><span class="date">9 <b class="month">mai</b></span><span class="acc">Journée de l’Europe / Etats Généraux de l’Europe</span></a></li>
+            <li class="active"><a href="#date-second" data-toggle="tab"><span class="date">15 <b class="month">mai</b></span><span class="acc">Grand débat entre les candidats à la présidence de la Commission européenne</span></a></li>
+            <li><a href="#date-third" data-toggle="tab"><span class="date">25 <b class="month">mai</b></span><span class="acc">Soirée électorale européenne</span></a></li>
           </ul>
         </nav>
       </header>
-      <main id="main-content" role="main">
-        <div class="live">
-          <section class="live-media">
-            <p class="lead live-intro">Référence au discours fondateur de Robert Schuman en 1950, <strong>le 9 mai</strong> est une date historique : c’est la Journée de l’Europe ! C’est aussi le rendez-vous immanquable de la société civile européenne pour les Etats Généraux de l’Europe. Euradionantes vous fait vivre cette journée spéciale ponctuée de nombreux événements.</p>
+      <main id="main-content" role="main" class="tab-content">
+        <div id="date-first" class="tab-pane">
+          <div class="live">
+            <section class="live-media">
+              <p class="lead live-intro">Référence au discours fondateur de Robert Schuman en 1950, <strong>le 9 mai</strong> est une date historique : c’est la Journée de l’Europe ! C’est aussi le rendez-vous immanquable de la société civile européenne pour les Etats Généraux de l’Europe. Euradionantes vous fait vivre cette journée spéciale ponctuée de nombreux événements.</p>
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#live-media-video" id="tab-video" data-toggle="tab">à voir</a></li>
+                <li><a href="#live-media-audio" id="tab-audio" data-toggle="tab">à écouter</a></li>
+              </ul>
+              <div class="tab-content">
+                <article id="live-media-video" class="tab-pane active"><a href="http://www.glowbl.com/EGE" target="_blank" title="Nouvelle fenêtre"><img src="assets/images/placeholder-video.jpg" alt="Lire"></a></article>
+                <article id="live-media-audio" class="tab-pane"><a href="https://soundcloud.com/euradionantes/sets/ep2014" class="sc-player">Notre sélection EP2014</a>
+                </article>
+              </div>
+            </section>
+            <section class="live-tweets">
+              <header>
+                <h1>Sur Twitter&nbsp;</h1>
+                <div class="btn-group btn-group-xs group-link"><a href="https://twitter.com/EuradioEP2014" class="btn btn-primary btn-sm account">@EuradioEP2014</a><a href="https://twitter.com/search?q=%23EP2014&amp;src=hash" target="_blank" title="Le hashtag #EP2014" class="btn btn-primary btn-sm">#EP2014</a></div>
+              </header><a href="https://twitter.com/shinze" data-widget-id="463623698667159553" data-chrome="nofooter transparent noheader" data-border-color="#006a9f" data-link-color="#6cceff" data-theme="dark" height="600" width="200" class="twitter-timeline">Tweets d’Euradio Nantes</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </section>
+          </div>
+          <section class="cold">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#live-media-video" id="tab-video" data-toggle="tab">à voir</a></li>
-              <li><a href="#live-media-audio" id="tab-audio" data-toggle="tab">à écouter</a></li>
+              <li class="active"><a href="#cold-tmblr" data-toggle="tab">en complément</a></li>
+              <li><a href="#cold-rss" data-toggle="tab">ailleurs</a></li>
             </ul>
             <div class="tab-content">
-              <article id="live-media-video" class="tab-pane active"><a href="http://www.glowbl.com/EGE" target="_blank" title="Nouvelle fenêtre"><img src="assets/images/placeholder-video.jpg" alt="Lire"></a></article>
-              <article id="live-media-audio" class="tab-pane"><a href="https://soundcloud.com/euradionantes/sets/ep2014" class="sc-player">Notre sélection EP2014</a>
-              </article>
+              <div id="cold-tmblr" class="tab-pane active">
+                <div class="container"></div>
+              </div>
+              <article id="cold-rss" class="tab-pane">Du son ici</article>
             </div>
-          </section>
-          <section class="live-tweets">
-            <header>
-              <h1>Sur Twitter&nbsp;</h1>
-              <div class="btn-group btn-group-xs group-link"><a href="https://twitter.com/EuradioEP2014" class="btn btn-primary btn-sm account">@EuradioEP2014</a><a href="https://twitter.com/search?q=%23EP2014&amp;src=hash" target="_blank" title="Le hashtag #EP2014" class="btn btn-primary btn-sm">#EP2014</a></div>
-            </header><a href="https://twitter.com/shinze" data-widget-id="463623698667159553" data-chrome="nofooter transparent noheader" data-border-color="#006a9f" data-link-color="#6cceff" data-theme="dark" height="600" width="200" class="twitter-timeline">Tweets d’Euradio Nantes</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           </section>
         </div>
-        <section class="cold">
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="#cold-tmblr" data-toggle="tab">en complément</a></li>
-            <li><a href="#cold-rss" data-toggle="tab">ailleurs</a></li>
-          </ul>
-          <div class="tab-content">
-            <div id="cold-tmblr" class="tab-pane active">
-              <div class="container"></div>
-            </div>
-            <article id="cold-rss" class="tab-pane">Du son ici</article>
-          </div>
-        </section>
+        <div id="date-second" class="tab-pane active">
+          <div class="live">loremmqlsd</div>
+        </div>
+        <div id="date-third" class="tab-pane">Lorem B</div>
       </main>
       <footer id="main-footer"><a href="http://ec.europa.eu/" target="_blank" title="Nouvelle fenêtre"><img src="assets/images/logo_commission_euro.png" alt="Logo Commission Européenne"></a><a href="http://www.europarl.europa.eu/" target="_blank" title="Nouvelle fenêtre"><img src="assets/images/logo_parlement_euro.png" alt="Logo Parlement européen"></a><a href="http://www.paysdelaloire.fr/" target="_blank" title="Nouvelle fenêtre"><img src="assets/images/logo_rpdl.png" alt="Logo des Pays de la Loire"></a><a href="http://www.loire-atlantique.fr/" target="_blank" title="Nouvelle fenêtre"><img src="assets/images/logo_la.png" alt="Logo du conseil régional de Loire Atlantique"></a><a href="http://www.nantesmetropole.fr/" target="_blank" title="Nouvelle fenêtre"><img src="assets/images/logo_nantes_metro.png" alt="Logo de Nantes Métropole"></a><a href="http://www.nantes.fr/" target="_blank" title="Nouvelle fenêtre"><img src="assets/images/logo_nantes.png" alt="Logo de la ville de Nantes"></a><a href="http://www.lespolypodes.fr/" target="_blank" title="Nouvelle fenêtre"><img src="assets/images/logo_polypodes.png" alt="Logo Les Polypodes"></a></footer>
       <script src="assets/js/main.min.js"></script>

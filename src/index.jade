@@ -1,64 +1,12 @@
 extends ./layouts/_default
 
 block content
-    main#main-content(role="main")
+    main#main-content.tab-content(role="main")
+        .tab-pane#date-first
+            include ./layouts/modules/date-first
 
-        .live
-            section.live-media
-                p.lead.live-intro Référence au discours fondateur de Robert Schuman en 1950, <strong>le 9 mai</strong> est une date historique : c’est la Journée de l’Europe ! C’est aussi le rendez-vous immanquable de la société civile européenne pour les Etats Généraux de l’Europe. Euradionantes vous fait vivre cette journée spéciale ponctuée de nombreux événements.
-                ul.nav.nav-tabs
-                    li.active
-                        a(href="#live-media-video", id='tab-video' data-toggle="tab") à voir
-                    li
-                        a(href="#live-media-audio", id='tab-audio' data-toggle="tab") à écouter
-                //- Tabbed content
-                .tab-content
-                    article.tab-pane.active#live-media-video
-
-                        a(href="http://www.glowbl.com/EGE", target="_blank", title="Nouvelle fenêtre")
-                            img(src="assets/images/placeholder-video.jpg", alt="Lire")
-
-                    article.tab-pane#live-media-audio
-                        //- a(href="https://soundcloud.com/musicdotexe").sc-player My new dub track
-                        a(href="https://soundcloud.com/euradionantes/sets/ep2014").sc-player Notre sélection EP2014
-
-
-
-            section.live-tweets
-                header
-                    h1 Sur Twitter&nbsp;
-                    .btn-group.btn-group-xs.group-link
-                        a(href="https://twitter.com/EuradioEP2014").btn.btn-primary.btn-sm.account @EuradioEP2014
-                        a(href="https://twitter.com/search?q=%23EP2014&src=hash", target="_blank", title="Le hashtag #EP2014").btn.btn-primary.btn-sm #EP2014
-
-                a.twitter-timeline(
-                        href="https://twitter.com/shinze",
-                        data-widget-id="463623698667159553",
-                        data-chrome="nofooter transparent noheader",
-                        data-border-color="#006a9f",
-                        data-link-color="#6cceff",
-                        data-theme="dark",
-                        height="600",
-                        width="200"
-                    )
-                    | Tweets d’Euradio Nantes
-
-                script !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-
-
-
-
-        section.cold
-            ul.nav.nav-tabs
-                li.active
-                    a(href="#cold-tmblr", data-toggle="tab") en complément
-                li
-                    a(href="#cold-rss", data-toggle="tab") ailleurs
-            //- Tabbed content
-            .tab-content
-                div.tab-pane.active#cold-tmblr
-                    .container
-
-
-                article.tab-pane#cold-rss
-                    | Du son ici
+        .tab-pane.active#date-second
+            .live
+                | loremmqlsd
+        .tab-pane#date-third
+            | Lorem B

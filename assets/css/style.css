@@ -2708,6 +2708,11 @@ fieldset[disabled] .sc-pause.active {
 #main-nav li {
   display: table-cell;
 }
+#main-nav li.active a {
+  color: white;
+  position: relative;
+  background: rgba(0, 40, 80, 0.8);
+}
 #main-nav a {
   display: block;
   padding: .5em 0 .5em .5em;
@@ -2719,11 +2724,6 @@ fieldset[disabled] .sc-pause.active {
 #main-nav a:hover,
 #main-nav a:focus {
   background-color: #000;
-}
-#main-nav a.current {
-  color: white;
-  position: relative;
-  background: rgba(0, 40, 80, 0.8);
 }
 #main-nav .date {
   font-weight: bold;
