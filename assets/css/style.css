@@ -2755,7 +2755,7 @@ fieldset[disabled] .sc-pause.active {
   padding: 1em 0;
 }
 .live-tweets iframe {
-  width: 100%;
+  width: 100% !important;
 }
 @media (max-width: 480px) {
   .live-tweets {
