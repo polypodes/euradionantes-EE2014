@@ -2647,6 +2647,7 @@ fieldset[disabled] .sc-pause.active {
 #main-header-banner h1 {
   font-size: 4em;
   font-weight: bold;
+  line-height: 1;
 }
 @media (max-width: 480px) {
   #main-header-banner h1 {
@@ -2655,6 +2656,8 @@ fieldset[disabled] .sc-pause.active {
 }
 #main-header-banner small {
   display: block;
+  margin-top: .7em;
+  font-size: 50%;
 }
 @media (min-width: 992px) {
   #main-header-banner img {
