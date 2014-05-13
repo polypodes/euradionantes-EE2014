@@ -2641,7 +2641,6 @@ fieldset[disabled] .sc-pause.active {
 }
 #main-header-banner {
   margin-bottom: 3em;
-  text-align: center;
   text-shadow: 0 3px 3px #000;
   padding: 1em;
 }
@@ -2660,6 +2659,31 @@ fieldset[disabled] .sc-pause.active {
 @media (min-width: 992px) {
   #main-header-banner img {
     margin: 0 20px;
+  }
+}
+.logos {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .logos {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+.pres {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .pres {
+    float: left;
+    width: 58.33333333%;
   }
 }
 #main-nav {

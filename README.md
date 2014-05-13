@@ -83,4 +83,3 @@ euradionantes.lespolypodes.com. 21599 IN CNAME  polypodes.github.io.
 polypodes.github.io.    3599    IN  CNAME   github.map.fastly.net.
 github.map.fastly.net.  3   IN  A   185.31.17.133
 ```
-
