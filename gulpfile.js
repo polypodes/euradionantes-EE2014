@@ -111,7 +111,11 @@ gulp.task('style', function () {
     .pipe(rename(paths.style.output))
     .pipe(less({ compress: true }))
     .pipe(rename(paths.style.output_min))
-    .pipe(uncss({ html: ['index.html'], timeout : 300, ignore: ['.cold-tmblr article'] }))
+    .pipe(uncss({
+        html: ['index.html'],
+        timeout : 300,
+        ignore: ['.cold-tmblr article', '.hidden']
+    }))
     .pipe(gulp.dest(paths.style.dest))
     .pipe(browserSync.reload({stream:true}));
     }
