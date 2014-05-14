@@ -114,7 +114,7 @@ gulp.task('style', function () {
     .pipe(uncss({
         html: ['index.html'],
         timeout : 800,
-        ignore: ['.cold-tmblr article', '.hidden', '.cold-tmblr-summary.active', '.cold-tmblr-summary', '.cold-tmblr-article', '.cold-tmblr-link']
+        ignore: ['.hidden', /(.cold-tmblr)(.)+/, /(.sc-)(.)+/]
     }))
     .pipe(gulp.dest(paths.style.dest))
     .pipe(browserSync.reload({stream:true}));
