@@ -18,8 +18,6 @@ var video = {
         'theme':        'dark', // or 'light'
         'color':        'red',  // or 'white'
         'origin':       document.location.origin,
-        'list':         false,
-        'listType':     false,
         'width':        false,
         'height':       false,
     }
@@ -28,7 +26,7 @@ var video = {
 
 jQuery('document').ready(function() {
 
-    var $feeds = $('#feeds'),
+    var $feeds = $('.cold-rss'),
         $poster = $('.cold-tmblr-list'),
         $body = $('.cold-tmblr-body');
 
@@ -91,8 +89,6 @@ jQuery('document').ready(function() {
         var found = false;
         video.provider = new Youtube();
         video.vars.autoplay = 1;
-        video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
-        video.vars.listType = 'playlist';
 
         if(data && 'OK' == data.meta.msg) {
             if(0 < data.response.posts.length) {
@@ -100,8 +96,6 @@ jQuery('document').ready(function() {
                 $('#live-media-video-15 .video-container').empty().append($('<div>', {
                     id: video.iframeId,
                 }));
-                video.vars.list = false;
-                video.vars.listType = false;
                 video.videoId = data.response.posts[0].youtube.videoId;
                 video.provider.init(video.videoId, video.iframeId, video.vars, false);
             }
@@ -110,19 +104,31 @@ jQuery('document').ready(function() {
             $('#live-media-video-15 .video-container').empty().append($('<div>', {
                 id: video.iframeId,
             }));
+            video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
+            video.vars.listType = 'playlist';
             video.provider.init(false, video.iframeId, video.vars, false); // videoId is optional in case of a list
         }
     });
 
     //--- Feeds ----------------------------------------------
     if(0 < $feeds.length) {
-
         var rss = new RssParser();
         rss.init($);
         rss.parse(function(data) {
             if(0 < data.value.items.length) {
+                $feeds.empty();
+                var months = Array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
                 for(var i in data.value.items) {
-                    console.log('iteraring:',data[i]);
+                    var item = data.value.items[i];
+                    var date = new Date(item.pubDate);
+                    var $date = $('<span >').text(date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
+                    var $article = $('<article />');
+                    var $title = $('<a />', {
+                        href: item.link
+                    }).text(item.title);
+                    item.description = item.description.replace(/[<]br[^>]*[>]/gi,"");
+                    $article.append([$title, $date, item.description]);
+                    $feeds.append($article);
                 }
             }
         });

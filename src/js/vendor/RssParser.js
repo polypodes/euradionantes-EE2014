@@ -7,10 +7,7 @@
 var RssParser = function(){
 
     var params = {
-        //feed:   'http://mix.chimpfeedr.com/3b292-EuradionantesEP2014',
-        //feed:   'http://www.rssmix.com/u/4064900/rss.xml',
-        feed:   'http://pipes.yahoo.com/pipes/pipe.run?_id=a7a5b8f009647f559b54107dbcec9002&_render=json',
-        limit:  20,
+        feed: 'http://pipes.yahoo.com/pipes/pipe.run?_id=a7a5b8f009647f559b54107dbcec9002&_render=json',
     };
     var jQuery;
 
@@ -19,12 +16,10 @@ var RssParser = function(){
      * @public
      * @param Object $ Jquery
      * @param string feed url
-     * @param int limit of items
      */
-    var init = function($, feed, limit) {
+    var init = function($, feed) {
         jQuery = $;
         params.feed = feed || params.feed;
-        params.limit = limit || params.limit
     }
 
     /**
