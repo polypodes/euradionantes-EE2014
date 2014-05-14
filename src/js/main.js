@@ -75,7 +75,7 @@ jQuery('document').ready(function() {
 
     //--- May, 15th videos  ----------------------------------------------
 
-    // a playlist by default, or a Tumblr video
+    // a playlist by default, or a Tumblr video if exists
     tumblr.getVideos(function(data) {
         var found = false;
         if(data && 'OK' == data.meta.msg) {
@@ -139,4 +139,3 @@ var onYouTubeIframeAPIReady = function() {
     video.provider.player = video.provider.setPlayer();
     video.ready = true;
 }
-

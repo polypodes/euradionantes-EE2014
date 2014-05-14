@@ -366,7 +366,7 @@ iframe {
 
 // RSS and Tmblr content
 .cold {
-    .make-xs-column(12);
+    // .make-xs-column(12);
     margin-bottom: 3em;
 }
 
@@ -535,12 +535,30 @@ iframe {
 //
 // Cold elements
 // ==========================================================================
-#cold {
+
+.cold {
     &-tmblr {
         .container { .make-row; }
         article {
-            .make-sm-column(4);
+            // .make-sm-column(4);
             h1 { font-size: 120%; }
         }
     }
+    &-tmblr-list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        .make-sm-column(4);
+    }
+    &-tmblr-summary {
+        &.active {
+            background-color: #000;
+        }
+    }
+    &-tmblr-body {
+        outline: 1px blue solid;
+        .make-sm-column(8);
+    }
+
+
 }
