@@ -2640,12 +2640,6 @@ fieldset[disabled] .sc-pause.active {
   }
 }
 .cold {
-  position: relative;
-  float: left;
-  width: 100%;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
   margin-bottom: 3em;
 }
 #main-content,
@@ -2778,18 +2772,37 @@ fieldset[disabled] .sc-pause.active {
   margin-left: -15px;
   margin-right: -15px;
 }
-.cold-tmblr article {
+.cold-tmblr article h1 {
+  font-size: 120%;
+}
+.cold-tmblr-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 768px) {
-  .cold-tmblr article {
+  .cold-tmblr-list {
     float: left;
     width: 33.33333333%;
   }
 }
-.cold-tmblr article h1 {
-  font-size: 120%;
+.cold-tmblr-summary.active {
+  background-color: #000;
+}
+.cold-tmblr-body {
+  outline: 1px blue solid;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .cold-tmblr-body {
+    float: left;
+    width: 66.66666667%;
+  }
 }

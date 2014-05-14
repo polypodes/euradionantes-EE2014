@@ -16,31 +16,44 @@ jQuery('document').ready(function() {
     //analyzer.init();
 
     var tumblr = new Tumblr(),
-    $poster = $('#cold-tmblr .container');
+        $poster = $('.cold-tmblr-list'),
+        $body = $('.cold-tmblr-body');
 
     tumblr.init($);
 
     tumblr.getPosts(function(data) {
+        console.log($poster);
         if('OK' == data.meta.msg) {
-            $poster = $('.cold-tmblr');
             for(var i in data.response.posts) {
-                $poster.append($('<article data-index="'+i+'">').html(
-                    '<div class="togglable summary" style="display:block">'
-                    + '<h1><a href="#">' + data.response.posts[i].title + '</a></h1>'
+                // Let’s build that article list
+                $poster.append($('<li data-index="'+i+'">').html(
+                    '<a href="#">' + data.response.posts[i].title + '</a>'
                     + data.response.posts[i].summary
-                    + '</div><div class="togglable body" style="display:none">'
-                    + '<h1><a href="#">' + data.response.posts[i].title + '</a></h1>'
-                    + data.response.posts[i].body
-                    + '</div>'
+                    + '</li>'
                     )
                 );
+                // Let’s build those article’s bodys
+                $body.append(
+                    '<article class="cold-tmblr-article hidden" data-body="'+ i +'">'
+                    + data.response.posts[i].body
+                    + '</article>'
+                );
             }
-
-            $('article .togglable h1 a').on('click', function(e){
-                e.preventDefault();
-                $('.togglable', $(this).parent().parent().parent()).toggle();
-            });
         }
+        // Article swapping logic
+        var $allArticles = $('.cold-tmblr-article');
+        $('.cold-tmblr-article[data-body="0"]').removeClass('hidden');
+        $('.cold-tmblr-list li').click(function() {
+            $allArticles
+                .addClass('hidden')
+                .eq($(this).index())
+                .removeClass('hidden');
+        });
+        // Same for the links
+        $('.cold-tmblr-list li a').click(function(e) {
+            e.preventDefault();
+            $('.cold-tmblr-list li').click();
+        });
     });
 
     tumblr.getVideos(function(data) {
