@@ -121,9 +121,9 @@ gulp.task('js', function() {
     return gulp.src(paths.js.files)
     .pipe(plumber())
     .pipe(concat(paths.js.output_min))
-    .pipe(uglify()) // = concat+ugly
+    //.pipe(uglify()) // = concat+ugly
     .pipe(gulp.dest(paths.js.dest))
-    .pipe(filesize())
+    //.pipe(filesize())
     .pipe(browserSync.reload({stream:true}));
 });
 

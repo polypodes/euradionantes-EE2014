@@ -7,19 +7,16 @@ var video = {
     iframeClass: 'youtubeIframe',
     iframeId:    'youtubePlayer',
     vars: { // see https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
-        'enablejsapi':  1,
-        'controls':     2,
-        'autoplay':     0,
-        'rel' :         0,
-        'loop':         1,
-        'showinfo':     0,
-        'egm':          0,
-        'showsearch':   0,
-        'theme':        'dark', // or 'light'
-        'color':        'red',  // or 'white'
-        'origin':       document.location.origin,
-        'list':         false,
-        'listType':     false,
+        'enablejsapi': 1,
+        'controls':2,
+        'autoplay': 1,
+        'rel' :0,
+        'loop': 1,
+        'showinfo': 0,
+        'egm': 0,
+        'showsearch':0,
+        'theme': 'light',
+        'color': 'white',
     }
 
 }
@@ -30,9 +27,9 @@ jQuery('document').ready(function() {
         $feeds = $('#feeds');
 
     //--- Posts ----------------------------------------------
-    var tumblr = new Tumblr();
-    tumblr.init($);
     if(0 < $posts.length) {
+        var tumblr = new Tumblr();
+        tumblr.init($);
         tumblr.getPosts(function(data) {
             if('OK' == data.meta.msg) {
                 $posts = $('#cold-tmblr');
@@ -55,38 +52,32 @@ jQuery('document').ready(function() {
                 });
             }
         });
+        /*
+        tumblr.getVideos(function(data) {
+            if('OK' == data.meta.msg) {
+                 if(0 < data.response.posts.length) {
+                     $('#live-media-video .video-container').empty().append($('<div>', {
+                         id: video.iframeId,
+                     }));
+                     video.videoId = data.response.posts[0].youtube.videoId;
+                     video.provider = new Youtube();
+                     video.provider.init(video.videoId, video.iframeId, video.vars, false);
+                 }
+            }
+        });
+        */
     }
 
-    //--- May, 15th videos  ----------------------------------------------
-    // a playlist by default, or a Tumblr video
-    tumblr.getVideos(function(data) {
-        var found = false;
-        console.log(data);
-        if(data && 'OK' == data.meta.msg) {
-            if(0 < data.response.posts.length) {
-                found = true;
-                $('#live-media-video-15 .video-container').empty().append($('<div>', {
-                    id: video.iframeId,
-                }));
-                video.videoId = data.response.posts[0].youtube.videoId;
-                video.provider = new Youtube();
-                video.vars.autoplay = 1;
-                video.provider.init(video.videoId, video.iframeId, video.vars, false);
-            }
-        }
-        if(!found) {
-            $('#live-media-video-15 .video-container').empty().append($('<div>', {
-                id: video.iframeId,
-            }));
-            video.provider = new Youtube();
+    //--- May, 9th tab ----------------------------------------------
+    $('#live-media-video-9 .video-container').empty().append($('<div>', {
+        id: video.iframeId,
+    }));
+    video.provider = new Youtube();
+    video.videoId = 'JH51HijDXk'; // optional, as far as a playlist is setted
+    //video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
+    //video.vars.listType = 'playlist';
+    video.provider.init(video.videoId, video.iframeId, video.vars, false);
 
-            video.vars.autoplay = 1;
-            video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
-            video.vars.listType = 'playlist';
-
-            video.provider.init(false, video.iframeId, video.vars, false); // videoId is optional in case of a list
-        }
-    });
 
     //--- Feeds ----------------------------------------------
     if(0 < $feeds.length) {
@@ -102,14 +93,19 @@ jQuery('document').ready(function() {
         });
     }
 
-    //--- Tabs clicking ----------------------------------------------
-    // Tab click event handles stopping any video/audio players
-    $('a[data-toggle=tab]').on('click', function(e){
+    // $('#live-media-video .video-container').empty().html('<iframe src="http://www.glowbl.com/EGE" frameborder="0" style="width:100% height:100%"/>');
+
+    //--- Tabs ----------------------------------------------
+    // Tab click event handlers + consequences on video/audio players
+    $('#tab-video').on('click', function(e){
         e.preventDefault();
-        if(video.provider.player) {
-            video.provider.player.pauseVideo();
-        }
+        //video.provider.player.playVideo();
         $.scPlayer.stopAll()
+    });
+
+    $('#tab-audio').on('click', function(e){
+        e.preventDefault();
+        //video.provider.player.stopVideo();
     });
 
     $('#main-nav ul li a').on('click', function(e) {

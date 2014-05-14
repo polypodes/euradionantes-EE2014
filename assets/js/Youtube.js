@@ -10,10 +10,10 @@ var Youtube = function()
     var params = {
             playerId :      false,
             videoId :       false,
-            vars: { // see https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
-            }
+            vars :          {},
         },
         player = false;
+
 
     /**
      * initialize parameters
@@ -24,13 +24,13 @@ var Youtube = function()
      *
      */
     var init = function(videoId, playerId, vars, play) {
-        params.videoId = videoId;
-        params.playerId = playerId;
-        params.vars = vars;
+        params.videoId = videoId || params.videoId;
+        params.playerId = playerId || params.playerId;
+        params.vars = vars || params.vars;
 
-        var tag = document.createElement('script');
+        var tag = document.createElement('script'),
+            firstScriptTag = document.getElementsByTagName('script')[0];
         tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
 
