@@ -26,6 +26,7 @@ var gulp = require('gulp'),
     // For less-css files
     less        = require('gulp-less'),
     prefixer    = require('gulp-autoprefixer'),
+    uncss       = require('gulp-uncss'),
 
     // For jade
     jade        = require('gulp-jade'),
@@ -108,12 +109,11 @@ gulp.task('style', function () {
     .pipe(prefixer('last 5 versions', 'ie 8'))
     .pipe(gulp.dest(paths.style.dest))
     .pipe(rename(paths.style.output))
-    .pipe(less({
-        compress: true
-        }))
-        .pipe(rename(paths.style.output_min))
-        .pipe(gulp.dest(paths.style.dest))
-        .pipe(browserSync.reload({stream:true}));
+    .pipe(less({ compress: true }))
+    .pipe(rename(paths.style.output_min))
+    .pipe(uncss({ html: ['index.html'] }))
+    .pipe(gulp.dest(paths.style.dest))
+    .pipe(browserSync.reload({stream:true}));
     }
 );
 
@@ -188,4 +188,3 @@ gulp.task( 'watch', function () {
 
 gulp.task('default', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator', 'server', 'watch']);
 gulp.task('build', ['clean', 'images', 'templates', 'style', 'js', 'icons', 'touchicons', 'htmlvalidator']);
-
