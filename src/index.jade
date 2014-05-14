@@ -4,7 +4,7 @@ block content
     main#main-content.tab-content(role="main")
 
         // May 9
-        .tab-pane#date-first.may9
+        .tab-pane#date-first
             section.live
                 .live-media
                     h1.sr-only Le 9 mai
@@ -30,7 +30,7 @@ block content
 
 
         // May 15
-        .tab-pane.active#date-second.may15
+        .tab-pane.active#date-second
             section.live
                 .live-media
                     h1.sr-only Le 15 mai
@@ -61,6 +61,16 @@ block content
                         a(href="#cold-rss-15", data-toggle="tab") ailleurs
                 //- Tabbed content
                 .tab-content
+                    div.tab-pane.active.cold-tmblr#cold-tmblr-15
+                        .container
+                            ul.cold-tmblr-list
+                            article.cold-tmblr-body
+                        article.tab-pane.cold-rss#cold-rss-15
+                            | Flux RSS
+
+
+
+                .tab-content
                     div.tab-pane.active#cold-tmblr-15
                         .container
 
@@ -69,7 +79,7 @@ block content
                         | Flux RSS
 
         // May 25
-        .tab-pane#date-third.may25
+        .tab-pane#date-third
             section.live
                 .live-media
                     h1.sr-only Le 25 mai
