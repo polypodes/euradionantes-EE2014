@@ -18,8 +18,8 @@ var video = {
         'theme':        'dark', // or 'light'
         'color':        'red',  // or 'white'
         'origin':       document.location.origin,
-        //'list':         '',
-        //'listType':     '',
+        'width':        false,
+        'height':       false,
     }
 
 }
