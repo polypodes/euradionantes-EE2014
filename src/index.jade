@@ -3,6 +3,8 @@ extends ./layouts/_default
 block content
     main#main-content.tab-content(role="main")
 
+
+
         // May 9
         .tab-pane#date-first
             section.live
@@ -27,6 +29,11 @@ block content
 
                 section.live-tweets
                     include ./layouts/modules/twitter
+
+
+
+
+
 
 
         // May 15
@@ -62,12 +69,11 @@ block content
                         a(href="#cold-rss-15", data-toggle="tab") ailleurs
                 //- Tabbed content
                 .tab-content
-                    div.tab-pane.active#cold-tmblr-15
+                    div.tab-pane.active.cold-tmblr#cold-tmblr-15
                         .container
-
-
-                    article.tab-pane#cold-rss-15
+                    article.tab-pane.cold-rss#cold-rss-15
                         | Flux RSS
+
 
         // May 25
         .tab-pane#date-third

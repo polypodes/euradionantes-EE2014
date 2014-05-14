@@ -22,7 +22,7 @@ jQuery('document').ready(function() {
 
     tumblr.getPosts(function(data) {
         if('OK' == data.meta.msg) {
-            $poster = $('#cold-tmblr');
+            $poster = $('.cold-tmblr');
             for(var i in data.response.posts) {
                 $poster.append($('<article data-index="'+i+'">').html(
                     '<div class="togglable summary" style="display:block">'
@@ -84,4 +84,3 @@ var onYouTubeIframeAPIReady = function() {
     video.provider.player = video.provider.setPlayer();
     video.ready = true;
 }
-
