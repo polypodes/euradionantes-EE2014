@@ -372,9 +372,24 @@ iframe {
         .make-xs-column(12);
         margin-bottom: 3em;
     }
-    &-tmblr .container { .make-row; }
+    .container { .make-row; }
     &-tmblr-body { .make-sm-column(8); }
     &-tmblr-list { .make-sm-column(4); }
+
+    &-rss {
+        .container {
+            column-count: 4;
+            column-gap: 15%;
+            // column-fill: auto;
+        }
+        &-item {
+            display: inline-block;
+            column-break-inside: avoid;
+        }
+        h1 {
+            font-size: 120%;
+        }
+    }
 }
 
 
