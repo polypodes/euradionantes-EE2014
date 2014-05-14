@@ -353,9 +353,7 @@ iframe {
     .make-md-column(5);
     text-align: center;
 }
-.pres {
-    .make-md-column(7);
-}
+.pres { .make-md-column(7); }
 
 
 // Live contents (tweets, video and sound)
@@ -378,16 +376,15 @@ iframe {
 
     &-rss {
         .container {
-            column-count: 4;
-            column-gap: 15%;
-            // column-fill: auto;
+            margin-top: 1em;
+            column-count: 2;
+            column-gap: 20%;
+            @media(min-width: @screen-md) { column-count: 3; }
+            @media(min-width: @screen-lg) { column-count: 4; }
         }
         &-item {
             display: inline-block;
             column-break-inside: avoid;
-        }
-        h1 {
-            font-size: 120%;
         }
     }
 }
@@ -471,6 +468,7 @@ iframe {
     font-size: 290%;
     line-height: .8;
     text-transform: uppercase;
+    clear: both;
 
     strong {
         font-weight: normal;
@@ -602,5 +600,16 @@ iframe {
         margin-bottom: .7em;
     }
 
-
+    &-rss {
+        h1 {
+            font-size: 120%;
+            margin-top: 0;
+        }
+        &-item {
+            border: 1px solid darken(@lines, 10%);
+            padding: 1em;
+            margin: .5em;
+            background: rgba(0,0,0,.2);
+        }
+    }
 }

@@ -112,7 +112,7 @@ gulp.task('style', function () {
     .pipe(uncss({
         html: ['index.html'],
         timeout : 800,
-        ignore: ['.hidden', /(.cold-tmblr)(.)+/, /(.sc-)(.)+/]
+        ignore: ['.hidden', /(.cold-)(.)+/, /(.sc-)(.)+/]
     }))
     .pipe(less({ compress: true }))
     .pipe(rename(paths.style.output_min))

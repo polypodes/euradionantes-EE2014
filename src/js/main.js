@@ -26,7 +26,7 @@ var video = {
 
 jQuery('document').ready(function() {
 
-    var $feeds = $('.cold-rss'),
+    var $feeds = $('.cold-rss-articles'),
         $poster = $('.cold-tmblr-list'),
         $body = $('.cold-tmblr-body');
 
@@ -111,28 +111,36 @@ jQuery('document').ready(function() {
     });
 
     //--- Feeds ----------------------------------------------
-    if(0 < $feeds.length) {
-        var rss = new RssParser();
-        rss.init($);
-        rss.parse(function(data) {
-            if(0 < data.value.items.length) {
-                $feeds.empty();
-                var months = Array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
-                for(var i in data.value.items) {
-                    var item = data.value.items[i];
-                    var date = new Date(item.pubDate);
-                    var $date = $('<span >').text(date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
-                    var $article = $('<article />');
-                    var $title = $('<a />', {
-                        href: item.link
-                    }).text(item.title);
-                    item.description = item.description.replace(/[<]br[^>]*[>]/gi,"");
-                    $article.append([$title, $date, item.description]);
-                    $feeds.append($article);
-                }
+
+    var rss = new RssParser();
+    rss.init($);
+    rss.parse(function(data) {
+        if(0 < data.value.items.length) {
+            $feeds.empty();
+            var months = Array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
+            for(var i in data.value.items) {
+                var item = data.value.items[i];
+                var date = new Date(item.pubDate);
+                var $date = $('<time>').text(date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
+                var $article = $('<article />', {
+                    class: 'cold-rss-item',
+                });
+                var $title = $('<h1 />');
+                var $link = $('<a />', {
+                    href: item.link,
+                    target: '_blank',
+                    title: 'Nouvelle fenêtre',
+                }).text(item.title);
+                item.description = item.description.replace(/(<([^>]+)>)/ig,"");
+                var $body = $('<div>', {
+                    class: 'cold-rss-body',
+                }).html(item.description);
+                $title.append($link);
+                $article.append([$title, $date, $body]);
+                $feeds.append($article);
             }
-        });
-    }
+        }
+    });
 
     //--- Tabs clicking ----------------------------------------------
     // Tab click event handles stopping any video/audio players
