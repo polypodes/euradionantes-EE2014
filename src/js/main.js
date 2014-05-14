@@ -26,7 +26,7 @@ var video = {
 
 jQuery('document').ready(function() {
 
-    var $feeds = $('#feeds'),
+    var $feeds = $('.cold-rss'),
         $poster = $('.cold-tmblr-list'),
         $body = $('.cold-tmblr-body');
 
@@ -112,13 +112,23 @@ jQuery('document').ready(function() {
 
     //--- Feeds ----------------------------------------------
     if(0 < $feeds.length) {
-
         var rss = new RssParser();
         rss.init($);
         rss.parse(function(data) {
             if(0 < data.value.items.length) {
+                $feeds.empty();
+                var months = Array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
                 for(var i in data.value.items) {
-                    console.log('iteraring:',data[i]);
+                    var item = data.value.items[i];
+                    var date = new Date(item.pubDate);
+                    var $date = $('<span >').text(date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
+                    var $article = $('<article />');
+                    var $title = $('<a />', {
+                        href: item.link
+                    }).text(item.title);
+                    item.description = item.description.replace(/[<]br[^>]*[>]/gi,"");
+                    $article.append([$title, $date, item.description]);
+                    $feeds.append($article);
                 }
             }
         });
