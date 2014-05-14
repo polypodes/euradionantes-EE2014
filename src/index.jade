@@ -13,17 +13,17 @@ block content
                     p.lead.live-intro Référence au discours fondateur de Robert Schuman en 1950, <strong>le 9 mai</strong> est une date historique : c’est la Journée de l’Europe ! C’est aussi le rendez-vous immanquable de la société civile européenne pour les Etats Généraux de l’Europe. Euradionantes vous fait vivre cette journée spéciale ponctuée de nombreux événements.
                     ul.nav.nav-tabs
                         li.active
-                            a(href="#live-media-video", id='tab-video' data-toggle="tab") à voir
+                            a(href="#live-media-video-9", id='tab-video-9' data-toggle="tab") à voir
                         li
-                            a(href="#live-media-audio", id='tab-audio' data-toggle="tab") à écouter
+                            a(href="#live-media-audio-9", id='tab-audio-9' data-toggle="tab") à écouter
                     //- Tabbed content
                     .tab-content
-                        article.tab-pane.active#live-media-video
+                        article.tab-pane.active#live-media-video-9
                             h1.sr-only Vidéo du 9 mai
                             a(href="http://www.glowbl.com/EGE", target="_blank", title="Nouvelle fenêtre")
                                 img(src="assets/images/placeholder-video.jpg", alt="Lire")
 
-                        article.tab-pane#live-media-audio
+                        article.tab-pane#live-media-audio-9
                             h1.sr-only La sélection audio du 9 mai
                             a(href="https://soundcloud.com/euradionantes/sets/ep2014").sc-player Notre sélection EP2014
 
@@ -51,8 +51,7 @@ block content
                     .tab-content
                         article.tab-pane.active#live-media-video-15
                             h1.sr-only Vidéo du 15 mai
-                            a(href="http://www.glowbl.com/EGE", target="_blank", title="Nouvelle fenêtre")
-                                img(src="assets/images/placeholder-video.jpg", alt="Lire")
+                            .video-container
 
                         article.tab-pane#live-media-audio-15
                             h1.sr-only La sélection audio du 15 mai

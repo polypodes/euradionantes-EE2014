@@ -8,13 +8,12 @@ var Youtube = function()
 {
 
     var params = {
-        playerId :      false,
-        videoId :       false,
-        vars :          {},
-    };
-
-    var player = false;
-
+            playerId :      false,
+            videoId :       false,
+            vars: { // see https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
+            }
+        },
+        player = false;
 
     /**
      * initialize parameters

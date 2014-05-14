@@ -6,23 +6,34 @@ var video = {
     currentPlayer: false,
     iframeClass: 'youtubeIframe',
     iframeId:    'youtubePlayer',
-    vars: {'autoplay':1, 'rel':0, 'showinfo':0, 'egm':0, 'showsearch':0,}
+    vars: { // see https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
+        'enablejsapi':  1,
+        'controls':     2,
+        'autoplay':     0,
+        'rel' :         0,
+        'loop':         1,
+        'showinfo':     0,
+        'egm':          0,
+        'showsearch':   0,
+        'theme':        'dark', // or 'light'
+        'color':        'red',  // or 'white'
+        'origin':       document.location.origin,
+        'list':         false,
+        'listType':     false,
+    }
 
 }
 
 jQuery('document').ready(function() {
 
-    //var analyzer = new GoogleAnalyzer();
-    //analyzer.init();
-
-    var tumblr = new Tumblr(),
+    var $feeds = $('#feeds'),
         $poster = $('.cold-tmblr-list'),
         $body = $('.cold-tmblr-body');
 
+    var tumblr = new Tumblr();
     tumblr.init($);
 
     tumblr.getPosts(function(data) {
-        console.log($poster);
         if('OK' == data.meta.msg) {
             for(var i in data.response.posts) {
                 // Let’s build that article list
@@ -40,65 +51,92 @@ jQuery('document').ready(function() {
                     + '</article>'
                 );
             }
+            //
+            // Article swapping logic
+            //
+            var $allArticles = $('.cold-tmblr-article');
+            var $allSums = $('.cold-tmblr-list li');
+            var $allSumsLinks = $('.cold-tmblr-list a');
+
+            // Show the first item at init
+            $allArticles.eq('0').removeClass('hidden');
+            $allSums.eq('0').addClass('active');
+
+            // Sum list interactivity
+            $allSums.click(function() {
+                $allSums.removeClass('active');
+                $(this).addClass('active');
+                $allArticles
+                    .addClass('hidden')
+                    .eq($(this).index())
+                    .removeClass('hidden');
+            });
+
+            // Same for the links
+            $allSumsLinks.click(function(e) {
+                e.preventDefault();
+                $('.cold-tmblr-list li').click();
+            });
         }
-        //
-        // Article swapping logic
-        //
-        var $allArticles = $('.cold-tmblr-article');
-        var $allSums = $('.cold-tmblr-list li');
-        var $allSumsLinks = $('.cold-tmblr-list a');
 
-        // Show the first item at init
-        $allArticles.eq('0').removeClass('hidden');
-        $allSums.eq('0').addClass('active');
-
-        // Sum list interactivity
-        $allSums.click(function() {
-            $allSums.removeClass('active');
-            $(this).addClass('active');
-            $allArticles
-                .addClass('hidden')
-                .eq($(this).index())
-                .removeClass('hidden');
-        });
-
-        // Same for the links
-        $allSumsLinks.click(function(e) {
-            e.preventDefault();
-            $('.cold-tmblr-list li').click();
-        });
     });
 
+
+    //--- May, 15th videos  ----------------------------------------------
+
+    // a playlist by default, or a Tumblr video if exists
     tumblr.getVideos(function(data) {
-        if('OK' == data.meta.msg) {
-            /*
+        var found = false;
+        video.provider = new Youtube();
+        video.vars.autoplay = 1;
+        video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
+        video.vars.listType = 'playlist';
+
+        if(data && 'OK' == data.meta.msg) {
             if(0 < data.response.posts.length) {
-                $('#live-media-video .video-container').empty().append($('<div>', {
+                found = true;
+                $('#live-media-video-15 .video-container').empty().append($('<div>', {
                     id: video.iframeId,
                 }));
+                video.vars.list = false;
+                video.vars.listType = false;
                 video.videoId = data.response.posts[0].youtube.videoId;
-                video.provider = new Youtube();
                 video.provider.init(video.videoId, video.iframeId, video.vars, false);
             }
-            */
+        }
+        if(!found) {
+            $('#live-media-video-15 .video-container').empty().append($('<div>', {
+                id: video.iframeId,
+            }));
+            video.provider.init(false, video.iframeId, video.vars, false); // videoId is optional in case of a list
         }
     });
 
-    // $('#live-media-video .video-container').empty().html('<iframe src="http://www.glowbl.com/EGE" frameborder="0" style="width:100% height:100%"/>');
+    //--- Feeds ----------------------------------------------
+    if(0 < $feeds.length) {
 
-    // Tab click event handlers + consequences on video/audio players
-    $('#tab-video').on('click', function(e){
+        var rss = new RssParser();
+        rss.init($);
+        rss.parse(function(data) {
+            if(0 < data.value.items.length) {
+                for(var i in data.value.items) {
+                    console.log('iteraring:',data[i]);
+                }
+            }
+        });
+    }
+
+    //--- Tabs clicking ----------------------------------------------
+    // Tab click event handles stopping any video/audio players
+    $('a[data-toggle=tab]').on('click', function(e){
         e.preventDefault();
-        //video.provider.player.playVideo();
+        if(video.provider.player) {
+            video.provider.player.pauseVideo();
+        }
         $.scPlayer.stopAll()
     });
 
-    $('#tab-audio').on('click', function(e){
-        e.preventDefault();
-        //video.provider.player.stopVideo();
-    });
-
-    $('#main-nav ul li a').on('click', function(e) {
+    $('#main-nav a').on('click', function(e) {
         e.preventDefault();
     });
 
