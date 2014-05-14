@@ -109,13 +109,13 @@ gulp.task('style', function () {
     .pipe(prefixer('last 5 versions', 'ie 8'))
     .pipe(gulp.dest(paths.style.dest))
     .pipe(rename(paths.style.output))
-    .pipe(less({ compress: true }))
-    .pipe(rename(paths.style.output_min))
     .pipe(uncss({
         html: ['index.html'],
         timeout : 800,
         ignore: ['.hidden', /(.cold-tmblr)(.)+/, /(.sc-)(.)+/]
     }))
+    .pipe(less({ compress: true }))
+    .pipe(rename(paths.style.output_min))
     .pipe(gulp.dest(paths.style.dest))
     .pipe(browserSync.reload({stream:true}));
     }
