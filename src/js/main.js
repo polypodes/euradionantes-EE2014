@@ -20,6 +20,8 @@ var video = {
         'origin':       document.location.origin,
         'list':         false,
         'listType':     false,
+        'width':        false,
+        'height':       false,
     }
 
 }

@@ -151,22 +151,24 @@ iframe {
 // Common elements and overrides
 // ==========================================================================
 .video-container {
-    // http://embedresponsively.com/
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 30px;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-    height: auto;
-    iframe, object, embed {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+    // & {
+    //     position: relative;
+    //     padding-bottom: 56.25%;
+    //     padding-top: 30px;
+    //     height: 0;
+    //     overflow: hidden;
+    //     max-width: 100%;
+    //     // height: auto;
+    // }
+    // iframe, object, embed {
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 100%;
+    // }
 }
+
 
 
 // Nav tabs bootstrap override
@@ -358,16 +360,21 @@ iframe {
 
 // Live contents (tweets, video and sound)
 .live {
-    margin-bottom: 3em;
     .clearfix;
+    margin-bottom: 3em;
     &-media { .make-md-column(8); }
     &-tweets { .make-md-column(4); }
 }
 
 // RSS and Tmblr content
 .cold {
-    .make-xs-column(12);
-    margin-bottom: 3em;
+    & {
+        .make-xs-column(12);
+        margin-bottom: 3em;
+    }
+    &-tmblr .container { .make-row; }
+    &-tmblr-body { .make-sm-column(8); }
+    &-tmblr-list { .make-sm-column(4); }
 }
 
 
@@ -537,9 +544,6 @@ iframe {
 // ==========================================================================
 
 .cold {
-    &-tmblr .container { .make-row; }
-    &-tmblr-body { .make-sm-column(8); }
-    &-tmblr-list { .make-sm-column(4); }
 
     &-tmblr {
         article h1 {
