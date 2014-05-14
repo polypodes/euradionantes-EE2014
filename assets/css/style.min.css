@@ -529,6 +529,12 @@ iframe {
 }
 
 .cold {
+  position: relative;
+  float: left;
+  width: 100%;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
   margin-bottom: 3em;
 }
 
@@ -687,10 +693,21 @@ iframe {
   margin-right: -15px;
 }
 
+.cold-tmblr-body {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width:768px) {
+  .cold-tmblr-body {
+    float: left;
+    width: 66.66666667%;
+  }
+}
+
 .cold-tmblr-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -704,17 +721,41 @@ iframe {
   }
 }
 
-.cold-tmblr-body {
-  outline: 1px #00f solid;
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
+.cold-tmblr-article {
+  padding: 1em;
 }
 
-@media (min-width:768px) {
-  .cold-tmblr-body {
-    float: left;
-    width: 66.66666667%;
-  }
+.cold-tmblr-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.cold-tmblr-summary {
+  cursor: pointer;
+  border-bottom: 1px solid #006a9f;
+  padding: .8em 1em;
+  margin: 0 0 0 0;
+}
+
+.cold-tmblr-summary.active {
+  position: relative;
+  background: rgba(0,14,29,0.8);
+}
+
+.cold-tmblr-summary.active:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 40%;
+  right: -40px;
+  border: 20px solid transparent;
+  border-left-color: rgba(0,14,29,0.8);
+}
+
+.cold-tmblr-link {
+  font-weight: bold;
+  font-size: 120%;
+  display: block;
+  margin-bottom: .7em;
 }

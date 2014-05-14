@@ -26,8 +26,8 @@ jQuery('document').ready(function() {
         if('OK' == data.meta.msg) {
             for(var i in data.response.posts) {
                 // Let’s build that article list
-                $poster.append($('<li data-index="'+i+'">').html(
-                    '<a href="#">' + data.response.posts[i].title + '</a>'
+                $poster.append($('<li data-index="'+i+'" class="cold-tmblr-summary">').html(
+                    '<a href="#" class="cold-tmblr-link">' + data.response.posts[i].title + '</a> '
                     + data.response.posts[i].summary
                     + '</li>'
                     )
@@ -35,22 +35,35 @@ jQuery('document').ready(function() {
                 // Let’s build those article’s bodys
                 $body.append(
                     '<article class="cold-tmblr-article hidden" data-body="'+ i +'">'
+                    + '<h1>' + data.response.posts[i].title + '</h1>'
                     + data.response.posts[i].body
                     + '</article>'
                 );
             }
         }
+        //
         // Article swapping logic
+        //
         var $allArticles = $('.cold-tmblr-article');
-        $('.cold-tmblr-article[data-body="0"]').removeClass('hidden');
-        $('.cold-tmblr-list li').click(function() {
+        var $allSums = $('.cold-tmblr-list li');
+        var $allSumsLinks = $('.cold-tmblr-list a');
+
+        // Show the first item at init
+        $allArticles.eq('0').removeClass('hidden');
+        $allSums.eq('0').addClass('active');
+
+        // Sum list interactivity
+        $allSums.click(function() {
+            $allSums.removeClass('active');
+            $(this).addClass('active');
             $allArticles
                 .addClass('hidden')
                 .eq($(this).index())
                 .removeClass('hidden');
         });
+
         // Same for the links
-        $('.cold-tmblr-list li a').click(function(e) {
+        $allSumsLinks.click(function(e) {
             e.preventDefault();
             $('.cold-tmblr-list li').click();
         });
