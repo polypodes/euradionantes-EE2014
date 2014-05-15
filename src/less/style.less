@@ -374,6 +374,15 @@ iframe {
     &-tmblr-body { .make-sm-column(8); }
     &-tmblr-list { .make-sm-column(4); }
 
+    @media(min-width: @screen-sm) {
+        &-tmblr-body,
+        &-tmblr-list {
+            max-height: 500px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+    }
+
     &-rss {
         .container {
             margin-top: 1em;

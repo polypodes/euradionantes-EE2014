@@ -2658,6 +2658,14 @@ fieldset[disabled] .sc-pause.active {
     width: 33.33333333%;
   }
 }
+@media (min-width: 768px) {
+  .cold-tmblr-body,
+  .cold-tmblr-list {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
 .cold-rss .container {
   margin-top: 1em;
   -webkit-column-count: 2;
