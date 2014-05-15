@@ -3,7 +3,7 @@
 var video = {
     provider: false,
     videoId: false,
-    currentPlayer: false,
+    players: [],
     iframeClass: 'youtubeIframe',
     iframeId:    'youtubePlayer',
     vars: { // see https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
@@ -159,8 +159,10 @@ jQuery('document').ready(function() {
     // Tab click event handles stopping any video/audio players
     $('a[data-toggle=tab]').on('click', function(e){
         e.preventDefault();
-        if(video.provider.player) {
-            video.provider.player.pauseVideo();
+        if(0 < video.players.length) {
+            for(var i in video.players) {
+                video.players[i].pauseVideo();
+            }
         }
         $.scPlayer.stopAll()
     });
@@ -174,6 +176,6 @@ jQuery('document').ready(function() {
 // YT Iframe API code downloads success event handler target
 // see https://developers.google.com/youtube/iframe_api_reference
 var onYouTubeIframeAPIReady = function() {
-    video.provider.player = video.provider.setPlayer();
+    video.players.push(video.provider.setPlayer());
     video.api = true;
 }

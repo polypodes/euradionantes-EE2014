@@ -29,7 +29,7 @@ var Youtube = function()
         params.playerId = playerId;
         params.vars = vars;
         if(video.api) {
-            video.provider.player = video.provider.setPlayer();
+            video.players.push(video.provider.setPlayer());
         } else {
             var tag = document.createElement('script');
             tag.src = "https://www.youtube.com/iframe_api";
