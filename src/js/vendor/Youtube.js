@@ -28,9 +28,8 @@ var Youtube = function()
         params.videoId = videoId;
         params.playerId = playerId;
         params.vars = vars;
-        if(video.api) {
-            video.players.push(video.provider.setPlayer());
-        } else {
+        if(!api) {
+            console.log('waiting for API to set player ' + playerId);
             var tag = document.createElement('script');
             tag.src = "https://www.youtube.com/iframe_api";
             tag.id = params.tagId;
