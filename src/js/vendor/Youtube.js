@@ -8,6 +8,7 @@ var Youtube = function()
 {
 
     var params = {
+            tagId :         'iframe_api',
             playerId :      false,
             videoId :       false,
             vars: { // see https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
@@ -27,11 +28,15 @@ var Youtube = function()
         params.videoId = videoId;
         params.playerId = playerId;
         params.vars = vars;
-
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        if(video.api) {
+            video.provider.player = video.provider.setPlayer();
+        } else {
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            tag.id = params.tagId;
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
     }
 
     /**
