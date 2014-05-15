@@ -88,20 +88,10 @@ block content
                 .live-media
                     h1.sr-only Le 25 mai
                     p.lead.live-intro Le 25 mai, les citoyens d’Europe sont appelés aux urnes pour élire leurs représentants au Parlement européen. Euradionantes en partenariat avec Radio Fidélité vous donne rendez-vous pour une grande soirée électorale, en direct et en public : analyses des résultats, invités, débats, interviews de personnalités politiques de tout le continent…
-                    ul.nav.nav-tabs
-                        li.active
-                            a(href="#live-media-video-25", id='tab-video-25' data-toggle="tab") à voir
-                        li
-                            a(href="#live-media-audio-25", id='tab-audio-25' data-toggle="tab") à écouter
-                    //- Tabbed content
-                    .tab-content
-                        article.tab-pane.active#live-media-video-25
-                            h1.sr-only Vidéo du 25 mai
-                            a(href="http://www.glowbl.com/EGE", target="_blank", title="Nouvelle fenêtre")
-                                img(src="http://placehold.it/750x530/6cceff/ffffff&text=%C3%80%20venir", alt="À venir")
-                        article.tab-pane#live-media-audio-25
-                            h1.sr-only La sélection audio du 25 mai
-                            img(src="http://placehold.it/750x530/6cceff/ffffff&text=%C3%80%20venir", alt="À venir")
+
+                    article.jumbotron
+                        h1 À ne pas rater
+                        p Rendez-vous ce jeudi 15 Mai à 20h pour suivre, en direct de Bruxelles, le grand débat de élections à la présidence de la commission européenne.
 
                 section.live-tweets
                     include ./layouts/modules/twitter
