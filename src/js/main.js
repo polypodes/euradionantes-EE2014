@@ -20,8 +20,7 @@ var video = {
         'origin':       document.location.origin,
         'width':        false,
         'height':       false,
-    },
-    api:                false,
+    }
 
 }
 
@@ -31,8 +30,6 @@ jQuery('document').ready(function() {
         $poster = $('.cold-tmblr-list'),
         $body = $('.cold-tmblr-body');
 
-
-    video.provider = new Youtube();
     var tumblr = new Tumblr();
     tumblr.init($);
 
@@ -60,6 +57,7 @@ jQuery('document').ready(function() {
             var $allArticles = $('.cold-tmblr-article');
             var $allSums = $('.cold-tmblr-list li');
             var $allSumsLinks = $('.cold-tmblr-list a');
+            var isMobile;
 
             // Show the first item at init
             $allArticles.eq('0').removeClass('hidden');
@@ -69,6 +67,10 @@ jQuery('document').ready(function() {
             $allSums.click(function() {
                 $allSums.removeClass('active');
                 $(this).addClass('active');
+                if(isMobile === true) {
+                    $('.cold-tmblr-list').hide();
+                    $('.cold-tmblr-body').show();
+                }
                 $allArticles
                     .addClass('hidden')
                     .eq($(this).index())
@@ -80,46 +82,45 @@ jQuery('document').ready(function() {
                 e.preventDefault();
                 $('.cold-tmblr-list li').click();
             });
+
+            // Back and forth for mobile devices
+            $('#cold-tmblr-15 .cold-tmblr-body').append('<a href="#" class="btn btn-primary back cold-tmblr-back">‹ Tous les articles</a>');
+            $('.cold-tmblr-back').click(function(e) {
+                e.preventDefault();
+                isMobile = true;
+                $('.cold-tmblr-body').hide();
+                $('.cold-tmblr-list').show();
+            });
         }
 
     });
 
-
-    //--- May, 9th videos  ----------------------------------------------
-    var iframeId = video.iframeId+'9';
-    $('#live-media-video-9 .video-container').empty().append($('<div>', {
-        id: iframeId,
-    }));
-    video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
-    video.vars.listType = 'playlist';
-    video.vars.autoplay = 0;
-    video.provider.init(false, iframeId, video.vars, false); // videoId is optional in case of a list
 
     //--- May, 15th videos  ----------------------------------------------
 
     // a playlist by default, or a Tumblr video if exists
     tumblr.getVideos(function(data) {
         var found = false;
-        video.vars.autoplay = 0;
-        var iframeId = video.iframeId+'15';
+        video.provider = new Youtube();
+        video.vars.autoplay = 1;
 
         if(data && 'OK' == data.meta.msg) {
             if(0 < data.response.posts.length) {
                 found = true;
                 $('#live-media-video-15 .video-container').empty().append($('<div>', {
-                    id: iframeId,
+                    id: video.iframeId,
                 }));
                 video.videoId = data.response.posts[0].youtube.videoId;
-                video.provider.init(video.videoId, iframeId, video.vars, false);
+                video.provider.init(video.videoId, video.iframeId, video.vars, false);
             }
         }
         if(!found) {
             $('#live-media-video-15 .video-container').empty().append($('<div>', {
-                id: iframeId,
+                id: video.iframeId,
             }));
             video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
             video.vars.listType = 'playlist';
-            video.provider.init(false, iframeId, video.vars, false); // videoId is optional in case of a list
+            video.provider.init(false, video.iframeId, video.vars, false); // videoId is optional in case of a list
         }
     });
 
@@ -175,5 +176,5 @@ jQuery('document').ready(function() {
 // see https://developers.google.com/youtube/iframe_api_reference
 var onYouTubeIframeAPIReady = function() {
     video.provider.player = video.provider.setPlayer();
-    video.api = true;
+    video.ready = true;
 }
