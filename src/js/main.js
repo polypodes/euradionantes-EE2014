@@ -20,7 +20,8 @@ var video = {
         'origin':       document.location.origin,
         'width':        false,
         'height':       false,
-    }
+    },
+    api:                false,
 
 }
 
@@ -30,6 +31,8 @@ jQuery('document').ready(function() {
         $poster = $('.cold-tmblr-list'),
         $body = $('.cold-tmblr-body');
 
+
+    video.provider = new Youtube();
     var tumblr = new Tumblr();
     tumblr.init($);
 
@@ -82,31 +85,41 @@ jQuery('document').ready(function() {
     });
 
 
+    //--- May, 9th videos  ----------------------------------------------
+    var iframeId = video.iframeId+'9';
+    $('#live-media-video-9 .video-container').empty().append($('<div>', {
+        id: iframeId,
+    }));
+    video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
+    video.vars.listType = 'playlist';
+    video.vars.autoplay = 0;
+    video.provider.init(false, iframeId, video.vars, false); // videoId is optional in case of a list
+
     //--- May, 15th videos  ----------------------------------------------
 
     // a playlist by default, or a Tumblr video if exists
     tumblr.getVideos(function(data) {
         var found = false;
-        video.provider = new Youtube();
-        video.vars.autoplay = 1;
+        video.vars.autoplay = 0;
+        var iframeId = video.iframeId+'15';
 
         if(data && 'OK' == data.meta.msg) {
             if(0 < data.response.posts.length) {
                 found = true;
                 $('#live-media-video-15 .video-container').empty().append($('<div>', {
-                    id: video.iframeId,
+                    id: iframeId,
                 }));
                 video.videoId = data.response.posts[0].youtube.videoId;
-                video.provider.init(video.videoId, video.iframeId, video.vars, false);
+                video.provider.init(video.videoId, iframeId, video.vars, false);
             }
         }
         if(!found) {
             $('#live-media-video-15 .video-container').empty().append($('<div>', {
-                id: video.iframeId,
+                id: iframeId,
             }));
             video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
             video.vars.listType = 'playlist';
-            video.provider.init(false, video.iframeId, video.vars, false); // videoId is optional in case of a list
+            video.provider.init(false, iframeId, video.vars, false); // videoId is optional in case of a list
         }
     });
 
@@ -162,5 +175,5 @@ jQuery('document').ready(function() {
 // see https://developers.google.com/youtube/iframe_api_reference
 var onYouTubeIframeAPIReady = function() {
     video.provider.player = video.provider.setPlayer();
-    video.ready = true;
+    video.api = true;
 }
