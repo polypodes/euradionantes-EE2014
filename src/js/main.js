@@ -1,28 +1,27 @@
 "use strict"
 
 var video = {
-    provider: false,
-    videoId: false,
-    currentPlayer: false,
-    iframeClass: 'youtubeIframe',
-    iframeId:    'youtubePlayer',
-    vars: { // see https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
-        'enablejsapi':  1,
-        'controls':     2,
-        'autoplay':     0,
-        'rel' :         0,
-        'loop':         1,
-        'showinfo':     0,
-        'egm':          0,
-        'showsearch':   0,
-        'theme':        'dark', // or 'light'
-        'color':        'red',  // or 'white'
-        'origin':       document.location.origin,
-        'width':        false,
-        'height':       false,
-    }
-
-}
+        provider: false,
+        videoId: false,
+        iframeClass: 'youtubeIframe',
+        iframeId:    'youtubePlayer',
+        vars: { // see https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
+            'enablejsapi':  1,
+            'controls':     2,
+            'autoplay':     0,
+            'rel' :         0,
+            'loop':         1,
+            'showinfo':     0,
+            'egm':          0,
+            'showsearch':   0,
+            'theme':        'dark', // or 'light'
+            'color':        'red',  // or 'white'
+            'origin':       document.location.origin,
+            'width':        false,
+            'height':       false,
+        }
+    },
+    api = false;
 
 jQuery('document').ready(function() {
 
@@ -30,6 +29,7 @@ jQuery('document').ready(function() {
         $poster = $('.cold-tmblr-list'),
         $body = $('.cold-tmblr-body');
 
+    video.provider = new Youtube();
     var tumblr = new Tumblr();
     tumblr.init($);
 
@@ -95,34 +95,53 @@ jQuery('document').ready(function() {
 
     });
 
+    //--- May, 9th videos  ----------------------------------------------
+
+    var iframeId = video.iframeId+'9';
+    $('#live-media-video-9 .video-container').empty().append($('<div>', {
+        id: iframeId,
+    }));
+    video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
+    video.vars.listType = 'playlist';
+    video.vars.autoplay = 0;
+    video.provider.init(false, iframeId, video.vars, false); // videoId is optional in case of a list
 
     //--- May, 15th videos  ----------------------------------------------
 
+    /*
+    var iframeId = video.iframeId+'15';
+    $('#live-media-video-15 .video-container').empty().append($('<div>', {
+        id: iframeId,
+    }));
+    var video15 = clone(video);
+    video15.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
+    video15.vars.listType = 'playlist';
+    video15.vars.autoplay = 0;
+    video15.provider.init(false, iframeId, video.vars, false); // videoId is optional in case of a list
+    videos.push(video15);
+    */
+
     // a playlist by default, or a Tumblr video if exists
+    /*
     tumblr.getVideos(function(data) {
-        var found = false;
-        video.provider = new Youtube();
-        video.vars.autoplay = 1;
+    var found = false;
+    video.vars.autoplay = 0;
+    var iframeId = video.iframeId+'15';
 
         if(data && 'OK' == data.meta.msg) {
             if(0 < data.response.posts.length) {
-                found = true;
+                found = false; // force playlist
                 $('#live-media-video-15 .video-container').empty().append($('<div>', {
-                    id: video.iframeId,
+                    id: iframeId,
                 }));
                 video.videoId = data.response.posts[0].youtube.videoId;
-                video.provider.init(video.videoId, video.iframeId, video.vars, false);
+                video.provider.init(video.videoId, iframeId, video.vars, false);
             }
         }
         if(!found) {
-            $('#live-media-video-15 .video-container').empty().append($('<div>', {
-                id: video.iframeId,
-            }));
-            video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
-            video.vars.listType = 'playlist';
-            video.provider.init(false, video.iframeId, video.vars, false); // videoId is optional in case of a list
-        }
+                    }
     });
+    */
 
     //--- Feeds ----------------------------------------------
 
@@ -160,9 +179,7 @@ jQuery('document').ready(function() {
     // Tab click event handles stopping any video/audio players
     $('a[data-toggle=tab]').on('click', function(e){
         e.preventDefault();
-        if(video.provider.player) {
-            video.provider.player.pauseVideo();
-        }
+        video.provider.player.pauseVideo();
         $.scPlayer.stopAll()
     });
 
@@ -175,6 +192,39 @@ jQuery('document').ready(function() {
 // YT Iframe API code downloads success event handler target
 // see https://developers.google.com/youtube/iframe_api_reference
 var onYouTubeIframeAPIReady = function() {
+    api = true;
     video.provider.player = video.provider.setPlayer();
-    video.ready = true;
+}
+
+// http://stackoverflow.com/a/728694/490589
+var clone = function(obj) {
+    // Handle the 3 simple types, and null or undefined
+    if (null == obj || "object" != typeof obj) return obj;
+
+    // Handle Date
+    if (obj instanceof Date) {
+        var copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
+    }
+
+    // Handle Array
+    if (obj instanceof Array) {
+        var copy = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy[i] = clone(obj[i]);
+        }
+        return copy;
+    }
+
+    // Handle Object
+    if (obj instanceof Object) {
+        var copy = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+        }
+        return copy;
+    }
+
+    throw new Error("Unable to copy obj! Its type isn't supported.");
 }
