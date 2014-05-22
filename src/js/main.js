@@ -25,13 +25,13 @@ var video = {
 
 jQuery('document').ready(function() {
 
-    var $feeds = $('.cold-rss-articles'),
-        $poster = $('.cold-tmblr-list'),
-        $body = $('.cold-tmblr-body');
-
     video.provider = new Youtube();
     var tumblr = new Tumblr();
     tumblr.init($);
+
+    var $feeds = $('.cold-rss-articles'),
+    $poster    = $('.cold-tmblr-list'),
+    $body      = $('.cold-tmblr-body');
 
     tumblr.getPosts(function(data) {
         if('OK' == data.meta.msg) {
@@ -92,8 +92,8 @@ jQuery('document').ready(function() {
                 $('.cold-tmblr-list').show();
             });
         }
-
     });
+
 
     //--- May, 9th videos  ----------------------------------------------
 
@@ -144,7 +144,6 @@ jQuery('document').ready(function() {
     */
 
     //--- Feeds ----------------------------------------------
-
     var rss = new RssParser();
     rss.init($);
     rss.parse(function(data) {
@@ -180,13 +179,21 @@ jQuery('document').ready(function() {
     $('a[data-toggle=tab]').on('click', function(e){
         e.preventDefault();
         video.provider.player.pauseVideo();
-        $.scPlayer.stopAll()
+        $.scPlayer.stopAll();
     });
 
     $('#main-nav a').on('click', function(e) {
         e.preventDefault();
+
+        setTimeout(function() {
+            $('.cold').appendTo('#main-content > .tab-pane.active');
+        }, 1000);
     });
 
+    /**
+     * move the .cold to the active tab
+     */
+    $('.cold').appendTo('#main-content > .tab-pane.active');
 });
 
 // YT Iframe API code downloads success event handler target

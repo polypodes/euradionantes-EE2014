@@ -361,7 +361,8 @@ iframe {
     .clearfix;
     margin-bottom: 3em;
     &-media { .make-md-column(8); }
-    &-tweets { .make-md-column(4); }
+    &-tweets,
+    &-results { .make-md-column(4); }
 }
 
 // RSS and Tmblr content
@@ -541,7 +542,8 @@ iframe {
     .tab-content { margin-bottom: 2em; }
 
     &-intro { font-size: 1.3em; }
-    &-tweets {
+    &-tweets,
+    &-results {
         header { padding: 1em 0; }
         iframe {
             width: 100% !important;
@@ -561,6 +563,20 @@ iframe {
             padding: 0;
         }
         .group-link { float: right; }
+    }
+
+    &-results {
+        h1 {
+            margin: 20px 0;
+        }
+
+        iframe {
+            height: 720px;
+        }
+    }
+
+    .jumbotron {
+        margin-top: 20px;
     }
 
 }
