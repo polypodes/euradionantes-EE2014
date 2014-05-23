@@ -1,10 +1,11 @@
 "use strict"
 
-var video = {
-        provider: false,
-        videoId: false,
+var videos = false,
+    api = false,
+    videoParams = {
         iframeClass: 'youtubeIframe',
-        iframeId:    'youtubePlayer',
+        divId:    'youtubePlayer',
+        tagId :         'iframe_api',
         vars: { // see https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
             'enablejsapi':  1,
             'controls':     2,
@@ -19,13 +20,13 @@ var video = {
             'origin':       document.location.origin,
             'width':        false,
             'height':       false,
+            'list': 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ',
+            'listTyper': 'playlist',
         }
-    },
-    api = false;
+    };
 
 jQuery('document').ready(function() {
 
-    video.provider = new Youtube();
     var tumblr = new Tumblr();
     tumblr.init($);
 
@@ -94,19 +95,7 @@ jQuery('document').ready(function() {
         }
     });
 
-
-    //--- May, 9th videos  ----------------------------------------------
-
-    var iframeId = video.iframeId+'9';
-    $('#live-media-video-9 .video-container').empty().append($('<div>', {
-        id: iframeId,
-    }));
-    video.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
-    video.vars.listType = 'playlist';
-    video.vars.autoplay = 0;
-    video.provider.init(false, iframeId, video.vars, false); // videoId is optional in case of a list
-
-    //--- May, 15th videos  ----------------------------------------------
+       //--- May, 15th videos  ----------------------------------------------
 
     /*
     var iframeId = video.iframeId+'15';
@@ -116,11 +105,9 @@ jQuery('document').ready(function() {
     var video15 = clone(video);
     video15.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
     video15.vars.listType = 'playlist';
-    video15.vars.autoplay = 0;
     video15.provider.init(false, iframeId, video.vars, false); // videoId is optional in case of a list
     videos.push(video15);
     */
-
     // a playlist by default, or a Tumblr video if exists
     /*
     tumblr.getVideos(function(data) {
@@ -178,8 +165,9 @@ jQuery('document').ready(function() {
     // Tab click event handles stopping any video/audio players
     $('a[data-toggle=tab]').on('click', function(e){
         e.preventDefault();
-        video.provider.player.pauseVideo();
+        videoPlayersPause();
         $.scPlayer.stopAll();
+        // TODO : same for Dailymotion (May, 25th video)
     });
 
     $('#main-nav a').on('click', function(e) {
@@ -194,13 +182,73 @@ jQuery('document').ready(function() {
      * move the .cold to the active tab
      */
     $('.cold').appendTo('#main-content > .tab-pane.active');
+
+    /*
+     * YoutubeIframeApi init. Triggers players creation (see event below)
+     * see https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
+     */
+    if(!api) {
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        tag.id = videoParams.tagId;
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+
 });
 
 // YT Iframe API code downloads success event handler target
 // see https://developers.google.com/youtube/iframe_api_reference
 var onYouTubeIframeAPIReady = function() {
     api = true;
-    video.provider.player = video.provider.setPlayer();
+    videos = videoPlayersCreate();
+}
+
+// YT Video players pausing
+// Firefox stops it. see
+// see https://developers.google.com/youtube/iframe_api_reference?hl=fr#Playback_status
+var videoPlayersPause = function() {
+    for (key in videos){
+        if($.inArray(videos[key].player.getPlayerState(), [0,1,3])){ // 0 is strange but OK
+            videos[key].player.pauseVideo();
+        }
+    }
+}
+
+// YT Video players creating
+var videoPlayersCreate = function() {
+    var videos = {
+        '_9': {
+            container: $('#live-media-video-9 .video-container'),
+            divId: videoParams.divId + 9,
+            div: $('<div>', {id: videoParams.divId + 9}),
+            player: false,
+        },
+        '_15': {
+            container: $('#live-media-video-15 .video-container'),
+            divId: videoParams.divId + 15,
+            div: $('<div>', {id: videoParams.divId + 15}),
+            player: false,
+        }
+    }
+
+    //--- May, 15th video playlist player
+    if(0 < videos._9.container.length){
+        videos._9.container.empty().append(videos._9.div);
+        videos._9.player = new YT.Player(videos._9.divId, {
+            playerVars: videoParams.vars
+        });
+    }
+    //--- May, 15th video playlist player
+    if(0 < videos._15.container.length){
+        videos._15.container.empty().append(videos._15.div);
+        videos._15.player = new YT.Player(videos._15.divId, {
+            playerVars: videoParams.vars
+        });
+    }
+
+    return videos;
 }
 
 // http://stackoverflow.com/a/728694/490589
