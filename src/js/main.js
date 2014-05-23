@@ -180,7 +180,19 @@ jQuery('document').ready(function() {
         e.preventDefault();
         video.provider.player.pauseVideo();
         $.scPlayer.stopAll();
+        stopDailymotion();
     });
+
+    // Tab click event Avoir/A écouter (stop dailymotion)
+    $('.live-media .nav.nav-tabs').on('click', function(e) {
+        // stop daylimotion
+        stopDailymotion();
+    });
+
+    var stopDailymotion = function() {
+        $('#dm_jukebox_iframe').attr('src','');
+        $('.active #dm_jukebox_iframe').attr('src', 'http://www.dailymotion.com/widget/jukebox?list[]=%2Fplaylist%2Fx37d08_euradionantes_tele-nantes%2F1&skin=default&autoplay=1&automute=0');
+    };
 
     $('#main-nav a').on('click', function(e) {
         e.preventDefault();
