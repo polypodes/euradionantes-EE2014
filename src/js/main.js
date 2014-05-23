@@ -136,19 +136,20 @@ jQuery('document').ready(function() {
         e.preventDefault();
         videoPlayersPause();
         $.scPlayer.stopAll();
-        stopDailymotion();
+        $('#dm_jukebox_iframe').attr('src','');
+        setTimeout(function() {
+            $('#date-third.tab-pane.active #live-media-video-95.tab-pane.active #dm_jukebox_iframe').attr('src', 'http://www.dailymotion.com/widget/jukebox?list[]=%2Fplaylist%2Fx37d08_euradionantes_tele-nantes%2F1&skin=default&autoplay=1&automute=0');
+        }, 1000);
     });
 
     // Tab click event Avoir/A écouter (stop dailymotion)
-    $('.live .live-media .nav.nav-tabs').on('click', function(e) {
+    $('#date-third .live .live-media .nav.nav-tabs').on('click', function(e) {
         // stop daylimotion
-        stopDailymotion();
-    });
-
-    var stopDailymotion = function() {
         $('#dm_jukebox_iframe').attr('src','');
-        $('.active #dm_jukebox_iframe').attr('src', 'http://www.dailymotion.com/widget/jukebox?list[]=%2Fplaylist%2Fx37d08_euradionantes_tele-nantes%2F1&skin=default&autoplay=1&automute=0');
-    };
+        setTimeout(function() {
+            $('#date-third #live-media-video-95.tab-pane.active #dm_jukebox_iframe').attr('src', 'http://www.dailymotion.com/widget/jukebox?list[]=%2Fplaylist%2Fx37d08_euradionantes_tele-nantes%2F1&skin=default&autoplay=1&automute=0');
+        }, 1000);
+    });
 
     $('#main-nav a').on('click', function(e) {
         e.preventDefault();
