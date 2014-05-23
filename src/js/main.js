@@ -1,6 +1,7 @@
 "use strict"
 
-var videos = false,
+var tumblr = false,
+    videos = false,
     api = false,
     videoParams = {
         iframeClass: 'youtubeIframe',
@@ -21,14 +22,16 @@ var videos = false,
             'width':        false,
             'height':       false,
             'list': 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ',
-            'listTyper': 'playlist',
+            'listType': 'playlist',
         }
     };
 
 jQuery('document').ready(function() {
 
-    var tumblr = new Tumblr();
-    tumblr.init($);
+    if(!tumblr) {
+        tumblr = new Tumblr();
+        tumblr.init($);
+    }
 
     var $feeds = $('.cold-rss-articles'),
     $poster    = $('.cold-tmblr-list'),
@@ -95,40 +98,6 @@ jQuery('document').ready(function() {
         }
     });
 
-       //--- May, 15th videos  ----------------------------------------------
-
-    /*
-    var iframeId = video.iframeId+'15';
-    $('#live-media-video-15 .video-container').empty().append($('<div>', {
-        id: iframeId,
-    }));
-    var video15 = clone(video);
-    video15.vars.list = 'PL9xW6UUQnWBKvquSnA5z4AxfWrfyOZynQ';
-    video15.vars.listType = 'playlist';
-    video15.provider.init(false, iframeId, video.vars, false); // videoId is optional in case of a list
-    videos.push(video15);
-    */
-    // a playlist by default, or a Tumblr video if exists
-    /*
-    tumblr.getVideos(function(data) {
-    var found = false;
-    video.vars.autoplay = 0;
-    var iframeId = video.iframeId+'15';
-
-        if(data && 'OK' == data.meta.msg) {
-            if(0 < data.response.posts.length) {
-                found = false; // force playlist
-                $('#live-media-video-15 .video-container').empty().append($('<div>', {
-                    id: iframeId,
-                }));
-                video.videoId = data.response.posts[0].youtube.videoId;
-                video.provider.init(video.videoId, iframeId, video.vars, false);
-            }
-        }
-        if(!found) {
-                    }
-    });
-    */
 
     //--- Feeds ----------------------------------------------
     var rss = new RssParser();
@@ -233,7 +202,7 @@ var videoPlayersCreate = function() {
         }
     }
 
-    //--- May, 15th video playlist player
+    //--- May, 9th video playlist player
     if(0 < videos._9.container.length){
         videos._9.container.empty().append(videos._9.div);
         videos._9.player = new YT.Player(videos._9.divId, {
@@ -241,14 +210,47 @@ var videoPlayersCreate = function() {
         });
     }
     //--- May, 15th video playlist player
-    if(0 < videos._15.container.length){
-        videos._15.container.empty().append(videos._15.div);
-        videos._15.player = new YT.Player(videos._15.divId, {
-            playerVars: videoParams.vars
-        });
-    }
 
-    return videos;
+   //--- May, 15th Tumblr Single Video
+
+   if (!tumblr) {
+       tumblr = new Tumblr();
+       tumblr.init($);
+   }
+
+   tumblr.getVideos(function(data) {
+       var found = false;
+
+       if(data && 'OK' == data.meta.msg) {
+           if(0 < data.response.posts.length) {
+               found = true;
+               if(0 < videos._15.container.length){
+                   videos._15.container.empty().append(videos._15.div);
+
+                   customParams = videoParams;
+                   customParams.vars.list = false;
+                   customParams.vars.listType = false;
+                   customParams.vars.videoId = data.response.posts[0].youtube.videoId;
+
+                   videos._15.player = new YT.Player(videos._15.divId, {
+                       videoId: customParams.vars.videoId,
+                       playVars: customParams.vars
+                   });
+               }
+           }
+       }
+       if(!found) {
+           // fallback to playlist
+           if(0 < videos._15.container.length){
+               videos._15.container.empty().append(videos._15.div);
+               videos._15.player = new YT.Player(videos._15.divId, {
+                   playerVars: videoParams.vars
+               });
+           }
+       }
+   });
+
+   return videos;
 }
 
 // http://stackoverflow.com/a/728694/490589
