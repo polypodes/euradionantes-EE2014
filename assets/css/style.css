@@ -2644,14 +2644,16 @@ fieldset[disabled] .sc-pause.active {
     width: 66.66666667%;
   }
 }
-.live-tweets {
+.live-tweets,
+.live-results {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 992px) {
-  .live-tweets {
+  .live-tweets,
+  .live-results {
     float: left;
     width: 33.33333333%;
   }
@@ -2837,28 +2839,44 @@ fieldset[disabled] .sc-pause.active {
 .live-intro {
   font-size: 1.3em;
 }
-.live-tweets header {
+.live-tweets header,
+.live-results header {
   padding: 1em 0;
 }
-.live-tweets iframe {
+.live-tweets iframe,
+.live-results iframe {
   width: 100% !important;
 }
 @media (max-width: 480px) {
-  .live-tweets {
+  .live-tweets,
+  .live-results {
     margin-top: 2em;
   }
 }
 .live-tweets .group-link,
-.live-tweets h1 {
+.live-results .group-link,
+.live-tweets h1,
+.live-results h1 {
   display: inline-block;
 }
-.live-tweets h1 {
+.live-tweets h1,
+.live-results h1 {
   font-size: 1.5em;
   margin: 0;
   padding: 0;
 }
-.live-tweets .group-link {
+.live-tweets .group-link,
+.live-results .group-link {
   float: right;
+}
+.live-results h1 {
+  margin: 20px 0;
+}
+.live-results iframe {
+  height: 720px;
+}
+.live .jumbotron {
+  margin-top: 20px;
 }
 .cold-tmblr article h1 {
   font-size: 120%;
