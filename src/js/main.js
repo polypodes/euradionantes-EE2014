@@ -132,16 +132,15 @@ jQuery('document').ready(function() {
 
     //--- Tabs clicking ----------------------------------------------
     // Tab click event handles stopping any video/audio players
-    $('a[data-toggle=tab]').on('click', function(e){
+    $('#main-nav a[data-toggle=tab]').on('click', function(e){
         e.preventDefault();
         videoPlayersPause();
         $.scPlayer.stopAll();
         stopDailymotion();
-
     });
 
     // Tab click event Avoir/A écouter (stop dailymotion)
-    $('.live-media .nav.nav-tabs').on('click', function(e) {
+    $('.live .live-media .nav.nav-tabs').on('click', function(e) {
         // stop daylimotion
         stopDailymotion();
     });
